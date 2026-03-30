@@ -8,7 +8,7 @@ Curated lists of **company-specific LeetCode questions** based on official compa
 
 Try the **new searchable dashboard** with difficulty statistics, real-time search, and easy navigation:
 
-[![Open Dashboard](https://img.shields.io/badge/Open_Dashboard-58a6ff?style=for-the-badge&logo=github&logoColor=white)](https://liquidslr.github.io/interview-company-wise-problems)
+[![Open Dashboard](https://img.shields.io/badge/Open_Dashboard-58a6ff?style=for-the-badge&logo=github&logoColor=white)][(https://liquidslr.github.io/interview-company-wise-problems)](https://dilcode011.github.io/interview-company-wise-problems/)
 
 <img width="1350" height="635" alt="image" src="https://github.com/user-attachments/assets/8c6a7d7e-1032-4ce2-af74-de615995b9a2" />
 
@@ -20,7 +20,7 @@ Try the **new searchable dashboard** with difficulty statistics, real-time searc
 
 ## How to Use
 
-1. Open the **[Dashboard](https://liquidslr.github.io/interview-company-wise-problems)**
+1. Open the **[Dashboard][https://liquidslr.github.io/interview-company-wise-problems](https://dilcode011.github.io/interview-company-wise-problems/)**
 2. Search for your target company (Amazon, Google, Meta, etc.)
 3. Click **"View All CSVs →"** to see:
    - `1. Thirty Days.csv`
