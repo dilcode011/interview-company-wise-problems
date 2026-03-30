@@ -4,7 +4,7 @@ Curated lists of **company-specific LeetCode questions** based on official compa
 
 **Last updated**: June 20, 2025 (Help us keep it fresh!)
 
-## 🚀 Live Dashboard
+##  Live Dashboard
 
 Try the **new searchable dashboard** with difficulty statistics, real-time search, and easy navigation:
 
@@ -40,4 +40,4 @@ See **[CONTRIBUTING.md](CONTRIBUTING.md)** — We welcome updates to CSVs, new f
 
 ---
 
-⭐ Star this repo if it helped you prepare for interviews!
+ Star this repo if it helped you prepare for interviews!
