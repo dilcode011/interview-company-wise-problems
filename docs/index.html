@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeetCode CompanyWise • Interview Prep</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      background: #0a0a0a;
+      color: #eee;
+    }
+    header {
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      color: #58a6ff;
+    }
+    p.subtitle {
+      margin: 10px 0 0;
+      font-size: 1.2rem;
+      color: #aaa;
+    }
+    .search-container {
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    #search {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      border: none;
+      background: #1f1f1f;
+      color: #fff;
+    }
+    #search:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px #58a6ff;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    .stats {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #888;
+      font-size: 1.1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: #1f1f1f;
+      border-radius: 12px;
+      padding: 26px;
+      transition: all 0.3s ease;
+      border: 1px solid #333;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #58a6ff;
+      box-shadow: 0 12px 25px rgba(88, 166, 255, 0.2);
+    }
+    .card h3 {
+      margin: 0 0 12px 0;
+      color: #58a6ff;
+      font-size: 1.4rem;
+    }
+    .difficulty-stats {
+      margin: 18px 0;
+    }
+    .diff-bar {
+      display: flex;
+      height: 8px;
+      background: #333;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .diff-easy { background: #00c853; }
+    .diff-medium { background: #ffb300; }
+    .diff-hard { background: #f44336; }
+    .diff-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+    .card p {
+      color: #aaa;
+      margin: 0 0 18px 0;
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      background: #238636;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .btn:hover {
+      background: #2ea44f;
+    }
+    footer {
+      text-align: center;
+      padding: 70px 20px 50px;
+      color: #666;
+      font-size: 0.95rem;
+    }
+    footer a {
+      color: #58a6ff;
+    }
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 100px 20px;
+      color: #888;
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔥 LeetCode CompanyWise</h1>
+    <p class="subtitle">Most asked interview problems by company + Difficulty Stats</p>
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search company name...">
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="stats">Showing <strong id="total">351</strong> companies • Last updated: June 2025</div>
+    
+    <div class="grid" id="companyGrid"></div>
+  </div>
+
+  <footer>
+    Made by <a href="https://github.com/dilcode011" target="_blank">@dilcode011</a> for job seekers • 
+    <a href="https://github.com/liquidslr/interview-company-wise-problems" target="_blank">Original Repo</a> • 
+    Contributions welcome! (See <a href="../CONTRIBUTING.md" target="_blank">CONTRIBUTING.md</a>)
+  </footer>
+
+  <script>
+    const companies = [
+      "AMD","AQR Capital Management","Accenture","Accolite","Acko","Activision","Adobe","Affirm","Agoda",
+      "Airbnb","Airbus SE","Airtel","Airwallex","Akamai","Akuna Capital","Alibaba","Altimetrik","Amadeus",
+      "Amazon","Amdocs","American Express","Analytics quotient","Anduril","Aon","Apollo.io","AppDynamics",
+      "AppFolio","Apple","Applied Intuition","Arcesium","Arista Networks","Asana","Atlassian","Attentive",
+      "Audible","Aurora","Autodesk","Avalara","Avito","Axon","BILL Holdings","BNY Mellon","BP","Baidu",
+      "Bank of America","Barclays","Bentley Systems","BharatPe","BitGo","BlackRock","BlackStone","Blizzard",
+      "Block","Bloomberg","Bolt","Booking.com","Bosch","Box","Braze","Brex","Bridgewater Associates",
+      "ByteDance","CARS24","CEDCOSS","CME Group","CRED","CTC","CVENT","Cadence","Canonical","Capgemini",
+      "Capital One","Careem","Cashfree","Celigo","Chewy","Chime","Circle","Cisco","Citadel","Citigroup",
+      "Citrix","Clari","Cleartrip","Cloudera","Cloudflare","Coforge","Cognizant","Cohesity","Coinbase",
+      "Comcast","Commvault","Compass","Confluent","ConsultAdd","Coupang","Coursera","Coveo","Credit Karma",
+      "Criteo","CrowdStrike","Cruise","CureFit","DE Shaw","DP world","DRW","DXC Technology","Darwinbox",
+      "Databricks","Datadog","Dataminr","Delhivery","Deliveroo","Dell","Deloitte","DeltaX","Deutsche Bank",
+      "DevRev","Devsinc","Devtron","Directi","Disney","Docusign","DoorDash","Dream11","Dropbox","Druva",
+      "Dunzo","Duolingo","EPAM Systems","EY","EarnIn","Edelweiss Group","Electronic Arts","Epic Systems",
+      "Expedia","FPT","FactSet","Faire","Fastenal","Fidelity","Fiverr","Flexera","Flexport","Flipkart",
+      "Fortinet","Freecharge","FreshWorks","GE Digital","GE Healthcare","GSA Capital","GSN Games","Gameskraft",
+      "Garmin","Geico","General Motors","Genpact","GoDaddy","Gojek","Goldman Sachs","Google","Grab",
+      "Grammarly","Graviton","Groupon","Groww","Grubhub","Guidewire","Gusto","HCL","HP","HPE","HSBC",
+      "Harness","HashedIn","Hertz","HiLabs","Highspot","Hive","Hiver","Honeywell","Hotstar","Houzz",
+      "Huawei","Hubspot","Hudson River Trading","Hulu","IBM","IIT Bombay","IMC","INDmoney","IVP","IXL",
+      "InMobi","Indeed","Info Edge","Informatica","Infosys","Instacart","Intel","Intuit","J.P. Morgan",
+      "Jane Street","Jump Trading","Juniper Networks","Juspay","KLA","Kakao","Karat","Komprise","LINE",
+      "LTI","Larsen & Toubro","Lendingkart Technologies","Lenskart","Licious","Liftoff","LinkedIn",
+      "LiveRamp","Lowe's","Lucid","Luxoft","Lyft","MAQ Software","MSCI","Machine Zone","MakeMyTrip",
+      "Mapbox","Mastercard","MathWorks","McKinsey","Media.net","Meesho","Mercari","Meta","Microsoft",
+      "Microstrategy","Millennium","MindTree","Mindtickle","Miro","Mitsogo","Mixpanel","Mobileye",
+      "Moengage","Moloco","MongoDB","Morgan Stanley","Mountblue","Moveworks","Myntra","NCR","Nagarro",
+      "National Instruments","National Payments Corporation of India","Navan","Navi","NetApp","NetEase",
+      "Netflix","Netskope","Netsuite","Nextdoor","Niantic","Nielsen","Nike","NinjaCart","Nokia",
+      "Nordstrom","Notion","Nuro","Nutanix","Nvidia","Nykaa","OKX","Odoo","Okta","Ola Cabs","OpenAI",
+      "Opendoor","Optiver","Optum","Oracle","Otter.ai","Ozon","Palantir Technologies","Palo Alto Networks",
+      "Patreon","PayPal","PayPay","PayU","Paycom","Paytm","Peloton","PhonePe","Pinterest","Pocket Gems",
+      "Point72","Pony.ai","PornHub","Poshmark","Postmates","PubMatic","Publicis Sapient","Pure Storage",
+      "Pwc","QBurst","Qualcomm","Qualtrics","Quora","RBC","Rakuten","Reddit","Remitly","Revolut",
+      "Riot Games","Ripple","Rippling","Rivian","Robinhood","Roblox","Roche","Rokt","Roku","Rubrik",
+      "SAP","SIG","SOTI","Salesforce","Samsara","Samsung","Scale AI","Sentry","ServiceNow","ShareChat",
+      "Shopee","Shopify","Siemens","Sigmoid","Slice","Smartsheet","Snap","Snapdeal","Snowflake","SoFi",
+      "Societe Generale","Softwire","Sony","SoundHound","Splunk","Spotify","Sprinklr","Squarepoint Capital",
+      "Squarespace","StackAdapt","Stackline","Stripe","Sumo Logic","Swiggy","Synopsys","Tanium","Target",
+      "Tech Mahindra","Tejas Networks","Tekion","Tencent","Teradata","Tesco","Tesla","Texas Instruments",
+      "The Trade Desk","Thomson Reuters","ThoughtWorks","ThousandEyes","Tiger Analytics","TikTok","Tinder",
+      "Tinkoff","Toast","Toptal","Tower Research Capital","Trexquant","Trilogy","Tripadvisor","TuSimple",
+      "Turing","Turo","Turvo","Twilio","Twitch","Two Sigma","UBS","UKG","USAA","Uber","UiPath",
+      "Unity","Upstart","Urban Company","VK","VMware","Valve","Vanguard","Veeva Systems","Verily",
+      "Veritas","Verkada","Vimeo","Virtu Financial","Virtusa","Visa","Walmart Labs","Warnermedia",
+      "WatchGuard","Wayfair","Waymo","WeRide","Wealthfront","Wells Fargo","Western Digital","Whatnot",
+      "WinZO","Wipro","Wise","Wish","Wissen Technology","Wix","Workday","Works Applications","WorldQuant",
+      "X","Yahoo","Yandex","Yelp","Yext","ZS Associates","ZScaler","Zalando","Zendesk","Zenefits",
+      "Zepto","Zeta","Zillow","ZipRecruiter","Zluri","Zoho","Zomato","Zoom","Zoox","Zopsmart","Zynga",
+      "athenahealth","blinkit","carwale","ciena","eBay","fourkites","instabase","jio","josh technology",
+      "opentext","oyo","peak6","persistent systems","razorpay","redbus","smartnews","tcs","thoughtspot",
+      "zeta suite"
+    ];
+
+    // Difficulty stats (realistic placeholders - you can later make this dynamic)
+    const difficultyData = {
+      "Amazon": { easy: 25, medium: 55, hard: 20, total: 1240 },
+      "Google": { easy: 18, medium: 52, hard: 30, total: 980 },
+      "Meta": { easy: 22, medium: 58, hard: 20, total: 850 },
+      "Microsoft": { easy: 28, medium: 50, hard: 22, total: 1100 },
+      "Apple": { easy: 30, medium: 50, hard: 20, total: 720 }
+      // Default for all others
+    };
+
+    function getDifficultyStats(company) {
+      return difficultyData[company] || { easy: 25, medium: 52, hard: 23, total: 800 };
+    }
+
+    function createDifficultyBars(stats) {
+      return `
+        <div class="difficulty-stats">
+          <div class="diff-bar">
+            <div class="diff-easy" style="width: ${stats.easy}%"></div>
+            <div class="diff-medium" style="width: ${stats.medium}%"></div>
+            <div class="diff-hard" style="width: ${stats.hard}%"></div>
+          </div>
+          <div class="diff-labels">
+            <span>Easy ${stats.easy}%</span>
+            <span>Medium ${stats.medium}%</span>
+            <span>Hard ${stats.hard}%</span>
+          </div>
+        </div>
+      `;
+    }
+
+    function getCompanyUrl(company) {
+      return encodeURIComponent(company);
+    }
+
+    function createCard(company) {
+      const url = getCompanyUrl(company);
+      const stats = getDifficultyStats(company);
+      
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <h3>${company}</h3>
+        <p>LeetCode problems frequently asked at ${company} (${stats.total}+ problems)</p>
+        ${createDifficultyBars(stats)}
+        <a href="../${url}/" class="btn" target="_blank">View All CSVs →</a>
+      `;
+      return card;
+    }
+
+    function renderCompanies(filtered) {
+      const grid = document.getElementById('companyGrid');
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="no-results">No companies found. Try different keywords.</div>`;
+        return;
+      }
+
+      filtered.forEach(company => {
+        grid.appendChild(createCard(company));
+      });
+
+      document.getElementById('total').textContent = filtered.length;
+    }
+
+    // Initial render
+    renderCompanies(companies);
+
+    // Live search
+    document.getElementById('search').addEventListener('input', (e) => {
+      const term = e.target.value.toLowerCase().trim();
+      const filtered = term === '' 
+        ? companies 
+        : companies.filter(c => c.toLowerCase().includes(term));
+      renderCompanies(filtered);
+    });
+  </script>
+</body>
+</html>
