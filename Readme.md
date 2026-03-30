@@ -10,9 +10,7 @@ Try the **new searchable dashboard** with difficulty statistics, real-time searc
 
 [![Open Dashboard](https://img.shields.io/badge/Open_Dashboard-58a6ff?style=for-the-badge&logo=github&logoColor=white)](https://liquidslr.github.io/interview-company-wise-problems)
 
-**or**
-
-[ Open Interactive Dashboard →](https://liquidslr.github.io/interview-company-wise-problems)
+<img width="1350" height="635" alt="image" src="https://github.com/user-attachments/assets/8c6a7d7e-1032-4ce2-af74-de615995b9a2" />
 
 ## Features of the Dashboard
 - Search any company instantly
