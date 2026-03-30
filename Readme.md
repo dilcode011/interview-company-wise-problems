@@ -4,7 +4,7 @@ Curated lists of **company-specific LeetCode questions** based on official compa
 
 **Last updated**: June 20, 2025 (Help us keep it fresh!)
 
-## 🚀 Live Dashboard
+##  Live Dashboard
 
 Try the **new searchable dashboard** with difficulty statistics, real-time search, and easy navigation:
 
@@ -12,7 +12,7 @@ Try the **new searchable dashboard** with difficulty statistics, real-time searc
 
 **or**
 
-[🔥 Open Interactive Dashboard →](https://liquidslr.github.io/interview-company-wise-problems)
+[ Open Interactive Dashboard →](https://liquidslr.github.io/interview-company-wise-problems)
 
 ## Features of the Dashboard
 - Search any company instantly
