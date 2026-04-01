@@ -1,9 +1,9 @@
 name: Update LeetCode Data
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 1 * *'
-  workflow_dispatch:
 
 jobs:
   update:
@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install requests
         run: pip install requests
 
       - name: Run script
@@ -29,7 +29,10 @@ jobs:
           python scripts/update_company.py "Google"
           python scripts/update_company.py "Microsoft"
 
+      - name: Debug files
+        run: ls -R
+
       - name: Commit & Push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update company problems data"
+          commit_message: "update leetcode company data"
