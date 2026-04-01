@@ -9,13 +9,43 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-        body { font-family: 'Inter', system_ui, sans-serif; }
+        
+        body { 
+            font-family: 'Inter', system_ui, sans-serif; 
+            overflow: hidden;
+        }
+        
         .table-row:hover { background-color: #1f2937; }
         .dark .table-row:hover { background-color: #374151; }
+        
         .sidebar-link { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .difficulty-easy { background-color: #10b981; }
         .difficulty-medium { background-color: #eab308; }
         .difficulty-hard { background-color: #ef4444; }
+        
+        .main-content {
+            height: calc(100vh - 73px);
+        }
+        
+        .table-wrapper {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .table-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            padding-top: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                height: calc(100vh - 130px);
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-200 min-h-screen transition-colors">
@@ -34,19 +64,19 @@
             </div>
 
             <div class="flex items-center gap-x-4">
-                <button onclick="toggleTheme()" id="theme-toggle" 
+                <button onclick="toggleTheme()" id="theme-toggle"
                         class="w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-2xl text-2xl transition-all">🌙</button>
                 <a href="https://github.com/liquidslr/interview-company-wise-problems" target="_blank"
-                   class="flex items-center gap-x-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-3xl text-sm font-medium">
+                   class="hidden sm:flex items-center gap-x-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-3xl text-sm font-medium">
                     <i class="fa-brands fa-github"></i> Source
                 </a>
             </div>
         </div>
     </nav>
 
-    <div class="max-w-screen-2xl mx-auto flex h-[calc(100vh-73px)] overflow-hidden">
+    <div class="main-content max-w-screen-2xl mx-auto flex overflow-hidden">
         <!-- Sidebar -->
-        <div id="sidebar" class="w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col md:block hidden">
+        <div id="sidebar" class="w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col md:block hidden overflow-hidden">
             <div class="p-6 border-b dark:border-gray-800">
                 <h2 class="font-semibold text-xl mb-4">Companies</h2>
                 <input id="company-search" type="text" placeholder="Filter companies..." 
@@ -59,8 +89,10 @@
             <div class="p-6 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
                 <h3 class="font-medium mb-3 flex items-center gap-2"><i class="fa-solid fa-target text-orange-500"></i> Daily Goal</h3>
                 <div class="flex gap-3">
-                    <input id="daily-goal" type="number" value="5" min="1" class="w-20 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-2xl px-4 py-2 text-center">
-                    <button onclick="setDailyGoal()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-sm font-medium">Set Goal</button>
+                    <input id="daily-goal" type="number" value="5" min="1" 
+                           class="w-20 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-2xl px-4 py-2 text-center focus:outline-none">
+                    <button onclick="setDailyGoal()" 
+                            class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-sm font-medium">Set Goal</button>
                 </div>
                 <div id="daily-progress" class="mt-5 bg-white dark:bg-gray-900 rounded-2xl p-4">
                     <div class="flex justify-between text-sm mb-2">
@@ -78,8 +110,8 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Welcome -->
-            <div id="welcome-screen" class="flex-1 flex items-center justify-center">
-                <div class="text-center">
+            <div id="welcome-screen" class="flex-1 flex items-center justify-center p-8">
+                <div class="text-center max-w-md">
                     <div class="text-8xl mb-6">🔥</div>
                     <h2 class="text-4xl font-semibold mb-3">LeetCode CompanyWise Pro</h2>
                     <p class="text-gray-600 dark:text-gray-400 mb-8">Daily goals • Progress tracking • Interview tips</p>
@@ -88,9 +120,9 @@
             </div>
 
             <!-- Company View -->
-            <div id="company-view" class="flex-1 hidden flex-col">
+            <div id="company-view" class="flex-1 hidden flex-col overflow-hidden">
                 <!-- Header -->
-                <div class="px-8 py-6 border-b dark:border-gray-800 bg-white dark:bg-gray-900 flex flex-col md:flex-row md:items-center gap-6">
+                <div class="px-6 py-5 border-b dark:border-gray-800 bg-white dark:bg-gray-900 flex flex-col md:flex-row md:items-center gap-4">
                     <div class="flex items-center gap-4">
                         <div id="company-icon" class="w-14 h-14 text-4xl flex items-center justify-center rounded-3xl"></div>
                         <div>
@@ -102,16 +134,16 @@
                 </div>
 
                 <!-- Stats -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-8 bg-gray-50 dark:bg-gray-950 border-b dark:border-gray-800">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-gray-50 dark:bg-gray-950 border-b dark:border-gray-800">
                     <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
                         <p class="text-gray-500 mb-4">Difficulty Distribution</p>
                         <div id="stats-bars" class="space-y-4"></div>
-                        <canvas id="difficulty-chart" height="120"></canvas>
+                        <canvas id="difficulty-chart" height="110"></canvas>
                     </div>
 
                     <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 flex flex-col">
-                        <p class="text-gray-500">Progress</p>
-                        <div class="flex-1 flex items-center justify-center gap-6">
+                        <p class="text-gray-500">Your Progress</p>
+                        <div class="flex-1 flex items-center justify-center gap-8">
                             <div class="text-center">
                                 <span id="solved-count" class="text-6xl font-semibold text-emerald-500">0</span>
                                 <span id="solved-total" class="text-3xl text-gray-400">/ 0</span>
@@ -122,16 +154,16 @@
 
                     <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 space-y-4">
                         <button onclick="pickRandomProblem()" class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-3xl font-medium flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-dice"></i> Pick Random Problem
+                            <i class="fa-solid fa-dice"></i> Random Problem
                         </button>
                         <button onclick="exportCurrentCSV()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-3xl font-medium flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-download"></i> Export as CSV
+                            <i class="fa-solid fa-download"></i> Export CSV
                         </button>
                     </div>
                 </div>
 
                 <!-- Filters -->
-                <div class="px-8 py-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 flex flex-wrap gap-4 items-center">
+                <div class="px-6 py-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 flex flex-wrap gap-4 items-center">
                     <div class="flex gap-2">
                         <button onclick="filterDifficulty('all')" id="filter-all" class="px-6 py-2 rounded-3xl bg-orange-500 text-white text-sm font-medium">All</button>
                         <button onclick="filterDifficulty('EASY')" class="px-6 py-2 rounded-3xl text-emerald-600 text-sm font-medium">Easy</button>
@@ -139,28 +171,30 @@
                         <button onclick="filterDifficulty('HARD')" class="px-6 py-2 rounded-3xl text-red-600 text-sm font-medium">Hard</button>
                     </div>
                     <input id="table-search" placeholder="Search title or topics..." 
-                           class="flex-1 bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-3 text-sm">
+                           class="flex-1 bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-3 text-sm focus:outline-none">
                 </div>
 
                 <!-- Table -->
-                <div class="flex-1 overflow-auto p-8 pt-2">
-                    <table id="problems-table" class="w-full text-sm">
-                        <thead class="sticky top-0 bg-white dark:bg-gray-900 z-10 border-b dark:border-gray-700">
-                            <tr class="text-left text-xs uppercase text-gray-500">
-                                <th onclick="sortTable(0)" class="px-4 py-5 cursor-pointer">Difficulty</th>
-                                <th onclick="sortTable(1)" class="px-4 py-5 cursor-pointer">Problem</th>
-                                <th onclick="sortTable(2)" class="px-4 py-5 cursor-pointer text-right">Frequency</th>
-                                <th onclick="sortTable(3)" class="px-4 py-5 cursor-pointer text-right">Acceptance</th>
-                                <th class="px-4 py-5">Topics</th>
-                                <th class="w-16 text-center">Solved</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body" class="divide-y divide-gray-200 dark:divide-gray-700"></tbody>
-                    </table>
+                <div class="table-wrapper">
+                    <div class="table-container">
+                        <table id="problems-table" class="w-full text-sm">
+                            <thead class="sticky top-0 bg-white dark:bg-gray-900 z-10 border-b dark:border-gray-700">
+                                <tr class="text-left text-xs uppercase text-gray-500">
+                                    <th onclick="sortTable(0)" class="px-4 py-5 cursor-pointer">Difficulty</th>
+                                    <th onclick="sortTable(1)" class="px-4 py-5 cursor-pointer">Problem</th>
+                                    <th onclick="sortTable(2)" class="px-4 py-5 cursor-pointer text-right">Frequency</th>
+                                    <th onclick="sortTable(3)" class="px-4 py-5 cursor-pointer text-right">Acceptance</th>
+                                    <th class="px-4 py-5">Topics</th>
+                                    <th class="w-16 text-center">Solved</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body" class="divide-y divide-gray-200 dark:divide-gray-700"></tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- Interview Tips -->
-                <div class="border-t dark:border-gray-800 bg-white dark:bg-gray-900 p-8">
+                <div class="border-t dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
                     <div onclick="toggleTips()" class="flex justify-between items-center cursor-pointer">
                         <h3 class="font-semibold text-lg flex items-center gap-3">
                             <i class="fa-solid fa-lightbulb text-yellow-500"></i> Interview Tips
@@ -188,8 +222,8 @@
     </div>
 
     <!-- Mobile Bottom Bar -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t dark:border-gray-800 py-4 text-center text-orange-500 font-medium cursor-pointer" onclick="toggleMobileSidebar()">
-        <i class="fa-solid fa-bars"></i> Companies
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t dark:border-gray-800 py-4 text-center text-orange-500 font-medium cursor-pointer z-50" onclick="toggleMobileSidebar()">
+        <i class="fa-solid fa-bars"></i> Browse Companies
     </div>
 
     <script>
@@ -217,18 +251,18 @@
         ];
 
         const COMPANY_TIPS = {
-            "Meta": "Strong focus on Graphs, Dynamic Programming, and System Design. Practice medium-hard problems.",
-            "Amazon": "Leadership Principles are heavily tested. Expect many medium-level questions.",
+            "Meta": "Strong focus on Graphs, Dynamic Programming, and System Design.",
+            "Amazon": "Leadership Principles are heavily tested. Expect many medium questions.",
             "Google": "Emphasis on optimization and hard algorithmic problems.",
             "Microsoft": "System Design + OOP concepts are very common.",
-            "Apple": "Clean code and UI/UX related problems are important.",
+            "Apple": "Clean code and UI/UX related problems.",
             "Default": "Explain your thought process clearly. Optimize when asked."
         };
 
-        // ==================== HELPER FUNCTIONS ====================
+        // ==================== HELPERS ====================
         function getCompanyEmoji(company) {
-            const emojis = { "Meta": "📘", "Amazon": "📦", "Google": "🔍", "Microsoft": "🪟", "Apple": "🍎" };
-            return emojis[company] || "🏢";
+            const map = { "Meta": "📘", "Amazon": "📦", "Google": "🔍", "Microsoft": "🪟", "Apple": "🍎" };
+            return map[company] || "🏢";
         }
 
         function parseCSV(csv) {
@@ -273,8 +307,8 @@
             document.getElementById('today-count').textContent = `${todaySolved} / ${dailyGoal}`;
             document.getElementById('today-bar').style.width = percent + '%';
             document.getElementById('streak-text').innerHTML = todaySolved >= dailyGoal 
-                ? '🎉 Daily goal achieved! Great job!' 
-                : `Keep going! ${dailyGoal - todaySolved} more problems today`;
+                ? '🎉 Daily goal achieved!' 
+                : `Keep going! ${dailyGoal - todaySolved} more today`;
         }
 
         function incrementDailyCount() {
@@ -288,7 +322,7 @@
             updateDailyUI();
         }
 
-        // ==================== LOAD COMPANIES ====================
+        // ==================== COMPANIES ====================
         async function loadCompanies() {
             try {
                 const res = await fetch('https://api.github.com/repos/liquidslr/interview-company-wise-problems/contents');
@@ -318,7 +352,7 @@
             renderCompanyList(filtered);
         }
 
-        // ==================== SELECT COMPANY ====================
+        // ==================== COMPANY SELECTION ====================
         async function selectCompany(company) {
             currentCompany = company;
             currentPeriod = TIME_PERIODS[0];
@@ -374,9 +408,9 @@
             const total = currentProblems.length || 1;
 
             document.getElementById('stats-bars').innerHTML = `
-                <div class="flex items-center gap-4"><span class="w-14 text-emerald-600">Easy</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-easy h-3" style="width: ${(easy/total)*100}%"></div></div><span class="font-mono">${easy}</span></div>
-                <div class="flex items-center gap-4"><span class="w-14 text-amber-600">Medium</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-medium h-3" style="width: ${(medium/total)*100}%"></div></div><span class="font-mono">${medium}</span></div>
-                <div class="flex items-center gap-4"><span class="w-14 text-red-600">Hard</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-hard h-3" style="width: ${(hard/total)*100}%"></div></div><span class="font-mono">${hard}</span></div>
+                <div class="flex items-center gap-4"><span class="w-14 text-emerald-600">Easy</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-easy h-3" style="width:${(easy/total)*100}%"></div></div><span class="font-mono">${easy}</span></div>
+                <div class="flex items-center gap-4"><span class="w-14 text-amber-600">Medium</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-medium h-3" style="width:${(medium/total)*100}%"></div></div><span class="font-mono">${medium}</span></div>
+                <div class="flex items-center gap-4"><span class="w-14 text-red-600">Hard</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-hard h-3" style="width:${(hard/total)*100}%"></div></div><span class="font-mono">${hard}</span></div>
             `;
 
             if (difficultyChart) difficultyChart.destroy();
@@ -433,7 +467,7 @@
                     <td class="px-4 py-4 font-medium"><a href="${p.Link || '#'}" target="_blank" class="hover:text-orange-500">${title} ↗</a></td>
                     <td class="px-4 py-4 text-right font-mono">${parseFloat(p.Frequency || 0).toFixed(1)}</td>
                     <td class="px-4 py-4 text-right font-mono">${(parseFloat(p['Acceptance Rate'] || 0) * 100).toFixed(1)}%</td>
-                    <td class="px-4 py-4 text-xs">${(p.Topics || '').split(',').map(t => `<span class="bg-gray-200 dark:bg-gray-700 px-2 py-px rounded mr-1">${t.trim()}</span>`).join('')}</td>
+                    <td class="px-4 py-4 text-xs">${(p.Topics || '').split(',').map(t => `<span class="bg-gray-200 dark:bg-gray-700 px-2 py-px rounded">${t.trim()}</span>`).join(' ')}</td>
                     <td class="px-4 py-4 text-center"><input type="checkbox" ${isSolved ? 'checked' : ''} onchange="toggleSolved('${title}', this.checked)" class="w-5 h-5 accent-emerald-500 cursor-pointer"></td>
                 `;
                 tbody.appendChild(row);
@@ -446,41 +480,17 @@
             renderTable(currentProblems);
         }
 
-        function toggleUnsolvedFilter() {
-            showUnsolvedOnly = !showUnsolvedOnly;
-            document.getElementById('unsolved-btn').textContent = showUnsolvedOnly ? "Show All" : "Unsolved Only";
-            renderTable(currentProblems);
-        }
-
-        function markAllSolved() {
-            if (!confirm("Mark all as solved?")) return;
-            const key = `${currentCompany}_solved`;
-            solvedProblems[key] = currentProblems.map(p => p.Title || p['Problem Title']);
-            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems));
-            currentProblems.forEach(() => incrementDailyCount());
-            updateSolvedCount();
-            renderTable(currentProblems);
-        }
-
-        function clearSolved() {
-            if (!confirm("Clear all solved marks?")) return;
-            const key = `${currentCompany}_solved`;
-            delete solvedProblems[key];
-            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems));
-            updateSolvedCount();
-            renderTable(currentProblems);
-        }
-
-        // ==================== TIPS ====================
         function toggleTips() {
             tipsOpen = !tipsOpen;
             document.getElementById('tips-content').classList.toggle('hidden', !tipsOpen);
             document.getElementById('tips-arrow').style.transform = tipsOpen ? 'rotate(180deg)' : '';
+            const tipText = COMPANY_TIPS[currentCompany] || COMPANY_TIPS.Default;
+            document.getElementById('company-tip-text').innerHTML = tipText;
         }
 
         // ==================== UTILITIES ====================
         function pickRandomProblem() {
-            if (!currentProblems.length) return alert("No problems loaded");
+            if (!currentProblems.length) return alert("No problems loaded yet");
             const random = currentProblems[Math.floor(Math.random() * currentProblems.length)];
             if (random.Link) window.open(random.Link, '_blank');
         }
@@ -492,10 +502,9 @@
                 csv += `"${p.Difficulty || ''}","${p.Title || p['Problem Title'] || ''}",${p.Frequency || 0},${p['Acceptance Rate'] || 0},"${p.Link || ''}","${p.Topics || ''}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = `${currentCompany}_problems.csv`;
+            a.href = URL.createObjectURL(blob);
+            a.download = `${currentCompany || 'problems'}_list.csv`;
             a.click();
         }
 
@@ -503,21 +512,24 @@
             document.getElementById('sidebar').classList.toggle('hidden');
         }
 
+        function sortTable(col) {
+            alert("Sorting feature coming soon!");
+        }
+
         // ==================== INIT ====================
         window.onload = async () => {
             await loadCompanies();
 
-            // Load saved theme
             if (localStorage.getItem('theme') === 'light') {
                 isDarkMode = false;
                 document.documentElement.classList.remove('dark');
                 document.getElementById('theme-toggle').innerHTML = '🌙';
             }
 
-            // Daily goal input
             document.getElementById('daily-goal').value = dailyGoal;
+            updateDailyUI();
 
-            // Global search
+            // Global Search
             document.getElementById('global-search').addEventListener('input', (e) => {
                 if (!currentProblems.length) return;
                 const term = e.target.value.toLowerCase();
@@ -527,7 +539,7 @@
                 renderTable(filtered);
             });
 
-            console.log('%c✅ LeetCode CompanyWise Pro is fully loaded with Daily Goal + Interview Tips!', 'color:#f59e0b; font-size:14px;');
+            console.log('%c✅ LeetCode CompanyWise Pro loaded successfully!', 'color:#f59e0b; font-weight:bold');
         };
     </script>
 </body>
