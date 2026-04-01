@@ -1,29 +1,29 @@
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 name: Update LeetCode Data
 
 on:
   schedule:
     - cron: '0 0 1 * *'
-  workflow_dispatch:         
+  workflow_dispatch:
+
 jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
-      contents: write         
+      contents: write
+
     steps:
-    
       - name: Checkout repository
         uses: actions/checkout@v4
 
-    
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-    
+      # ✅ This is the fixed step (most important change)
       - name: Update Company Data - Amazon
         run: |
           cd interview-company-wise-problems
@@ -33,4 +33,3 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update LeetCode company-wise problems data"
-          file_pattern: .
