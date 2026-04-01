@@ -16,55 +16,47 @@
         }
         
         .table-row:hover { background-color: #1f2937; }
-        .dark .table-row:hover { background-color: #374151; }
         
-        .sidebar-link { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .sidebar-link { transition: all 0.2s; }
         .difficulty-easy { background-color: #10b981; }
         .difficulty-medium { background-color: #eab308; }
         .difficulty-hard { background-color: #ef4444; }
         
-        .main-content { height: calc(100vh - 73px); }
-        
-        .table-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
+        .main-content { height: calc(100vh - 68px); }
         
         .table-container {
             flex: 1;
             overflow-y: auto;
-            padding: 1rem;
+            padding: 12px;
         }
         
         @media (max-width: 768px) {
-            .main-content { height: calc(100vh - 130px); }
-            .table-container { padding: 0.75rem; }
+            .main-content { height: calc(100vh - 125px); }
+            .table-container { padding: 8px; }
         }
     </style>
 </head>
-<body class="bg-gray-950 text-gray-200 min-h-screen transition-colors overflow-hidden">
+<body class="bg-gray-950 text-gray-200 min-h-screen transition-colors">
 
     <!-- Navbar -->
     <nav class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="max-w-screen-2xl mx-auto px-5 py-3.5 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
-                <div class="w-9 h-9 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl">🔥</div>
+                <div class="w-8 h-8 bg-orange-500 rounded-2xl flex items-center justify-center text-white text-xl">🔥</div>
                 <h1 class="text-2xl font-semibold tracking-tight">CompanyWise <span class="text-orange-400">Pro</span></h1>
             </div>
 
-            <div class="flex-1 max-w-xl mx-8">
+            <div class="flex-1 max-w-md mx-6">
                 <input id="global-search" type="text" placeholder="Search problems..." 
-                       class="w-full bg-gray-800 border border-gray-700 rounded-3xl px-6 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-orange-400 text-sm">
+                       class="w-full bg-gray-800 border border-gray-700 rounded-3xl px-5 py-2.5 pl-10 text-sm focus:outline-none focus:ring-1 focus:ring-orange-400">
             </div>
 
-            <div class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-3">
                 <button onclick="toggleTheme()" id="theme-toggle"
-                        class="w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 rounded-2xl text-xl">☀️</button>
+                        class="w-9 h-9 flex items-center justify-center bg-gray-800 hover:bg-gray-700 rounded-2xl text-lg">☀️</button>
                 <a href="https://github.com/liquidslr/interview-company-wise-problems" target="_blank"
-                   class="flex items-center gap-x-2 px-5 py-2 bg-gray-800 hover:bg-gray-700 rounded-3xl text-sm font-medium">
-                    <i class="fa-brands fa-github"></i> Source
+                   class="flex items-center gap-x-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-3xl text-sm">
+                    <i class="fa-brands fa-github text-lg"></i>
                 </a>
             </div>
         </div>
@@ -72,102 +64,95 @@
 
     <div class="main-content max-w-screen-2xl mx-auto flex overflow-hidden">
         <!-- Sidebar -->
-        <div id="sidebar" class="w-72 bg-gray-900 border-r border-gray-800 flex flex-col md:block hidden overflow-hidden">
-            <div class="p-6 border-b border-gray-800">
-                <h2 class="font-semibold text-xl mb-4">Companies</h2>
-                <input id="company-search" type="text" placeholder="Filter companies..." 
+        <div id="sidebar" class="w-64 bg-gray-900 border-r border-gray-800 flex flex-col md:block hidden overflow-hidden">
+            <div class="p-4 border-b border-gray-800">
+                <h2 class="font-semibold text-lg mb-3">Companies</h2>
+                <input id="company-search" type="text" placeholder="Filter..." 
                        onkeyup="filterCompanies()" 
-                       class="w-full bg-gray-800 rounded-3xl px-5 py-3 text-sm focus:outline-none">
+                       class="w-full bg-gray-800 rounded-3xl px-4 py-2 text-sm focus:outline-none">
             </div>
-            <div id="company-list" class="flex-1 overflow-y-auto p-3 space-y-1"></div>
+            <div id="company-list" class="flex-1 overflow-y-auto p-2 text-sm"></div>
 
             <!-- Daily Goal -->
-            <div class="p-6 border-t border-gray-800 bg-gray-950">
-                <h3 class="font-medium mb-3 flex items-center gap-2"><i class="fa-solid fa-target text-orange-400"></i> Daily Goal</h3>
-                <div class="flex gap-3">
+            <div class="p-4 border-t border-gray-800 bg-gray-950">
+                <h3 class="text-sm font-medium mb-2 flex items-center gap-2"><i class="fa-solid fa-target text-orange-400"></i> Daily Goal</h3>
+                <div class="flex gap-2">
                     <input id="daily-goal" type="number" value="5" min="1" 
-                           class="w-20 bg-gray-800 border border-gray-700 rounded-2xl px-4 py-2 text-center focus:outline-none">
+                           class="w-16 bg-gray-800 border border-gray-700 rounded-2xl px-3 py-1.5 text-center text-sm">
                     <button onclick="setDailyGoal()" 
-                            class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-sm font-medium">Set Goal</button>
+                            class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-xs font-medium">Set</button>
                 </div>
-                <div id="daily-progress" class="mt-5 bg-gray-900 rounded-2xl p-4">
-                    <div class="flex justify-between text-sm mb-2">
+                <div id="daily-progress" class="mt-4 bg-gray-900 rounded-2xl p-3 text-xs">
+                    <div class="flex justify-between mb-1">
                         <span>Today</span>
                         <span id="today-count">0 / 5</span>
                     </div>
-                    <div class="h-2.5 bg-gray-700 rounded-full overflow-hidden">
-                        <div id="today-bar" class="h-2.5 bg-emerald-500 rounded-full transition-all" style="width: 0%"></div>
+                    <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                        <div id="today-bar" class="h-1.5 bg-emerald-500 rounded-full transition-all" style="width: 0%"></div>
                     </div>
-                    <div id="streak-text" class="text-xs text-emerald-400 mt-3"></div>
+                    <div id="streak-text" class="mt-2 text-emerald-400 text-[10px]"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
+        <!-- Main Area -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Welcome -->
-            <div id="welcome-screen" class="flex-1 flex items-center justify-center p-8">
-                <div class="text-center max-w-md">
-                    <div class="text-8xl mb-6">🔥</div>
-                    <h2 class="text-4xl font-semibold mb-3">CompanyWise Pro</h2>
-                    <p class="text-gray-400 mb-8">Select a company from the left to start</p>
-                    <p class="text-sm text-gray-500">Made with ❤️ by Arshpreet</p>
+            <div id="welcome-screen" class="flex-1 flex items-center justify-center">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🔥</div>
+                    <h2 class="text-3xl font-semibold mb-2">CompanyWise Pro</h2>
+                    <p class="text-gray-400 text-sm">Select a company to begin</p>
                 </div>
             </div>
 
             <!-- Company View -->
             <div id="company-view" class="flex-1 hidden flex-col overflow-hidden">
                 <!-- Header -->
-                <div class="px-6 py-5 border-b border-gray-800 bg-gray-900 flex flex-col md:flex-row md:items-center gap-4">
-                    <div class="flex items-center gap-4">
-                        <div id="company-icon" class="w-14 h-14 text-4xl flex items-center justify-center rounded-3xl"></div>
-                        <div>
-                            <h1 id="company-name" class="text-3xl font-semibold"></h1>
-                            <p id="total-problems" class="text-gray-400"></p>
-                        </div>
+                <div class="px-5 py-4 border-b border-gray-800 bg-gray-900 flex items-center gap-4">
+                    <div id="company-icon" class="w-10 h-10 text-3xl flex items-center justify-center"></div>
+                    <div class="flex-1 min-w-0">
+                        <h1 id="company-name" class="text-xl font-semibold truncate"></h1>
+                        <p id="total-problems" class="text-xs text-gray-400"></p>
                     </div>
-                    <div id="time-tabs" class="flex flex-wrap gap-2 md:ml-auto"></div>
+                    <div id="time-tabs" class="flex gap-1 text-xs"></div>
                 </div>
 
-                <!-- Stats Row -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-gray-950 border-b border-gray-800">
-                    <div class="bg-gray-900 rounded-3xl p-6">
-                        <p class="text-gray-400 mb-4">Difficulty Distribution</p>
-                        <div id="stats-bars" class="space-y-4"></div>
-                        <canvas id="difficulty-chart" height="110"></canvas>
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-950 border-b border-gray-800">
+                    <div class="bg-gray-900 rounded-2xl p-4">
+                        <p class="text-xs text-gray-400 mb-3">Difficulty</p>
+                        <div id="stats-bars" class="space-y-3 text-xs"></div>
+                        <canvas id="difficulty-chart" height="80" class="mt-4"></canvas>
                     </div>
-
-                    <div class="bg-gray-900 rounded-3xl p-6 flex flex-col">
-                        <p class="text-gray-400">Your Progress</p>
-                        <div class="flex-1 flex items-center justify-center gap-8">
+                    <div class="bg-gray-900 rounded-2xl p-4 flex flex-col">
+                        <p class="text-xs text-gray-400">Progress</p>
+                        <div class="flex-1 flex items-center justify-center gap-6">
                             <div class="text-center">
-                                <span id="solved-count" class="text-6xl font-semibold text-emerald-400">0</span>
-                                <span id="solved-total" class="text-3xl text-gray-500">/ 0</span>
+                                <span id="solved-count" class="text-4xl font-semibold text-emerald-400">0</span>
+                                <span id="solved-total" class="text-xl text-gray-500">/0</span>
                             </div>
-                            <div id="progress-percent" class="text-6xl font-light text-emerald-400">0%</div>
+                            <div id="progress-percent" class="text-4xl font-light text-emerald-400">0%</div>
                         </div>
                     </div>
-
-                    <div class="bg-gray-900 rounded-3xl p-6 space-y-4">
-                        <button onclick="pickRandomProblem()" class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-3xl font-medium flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-dice"></i> Random Problem
+                    <div class="bg-gray-900 rounded-2xl p-4 flex flex-col gap-3">
+                        <button onclick="pickRandomProblem()" class="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-2xl text-sm font-medium flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-dice"></i> Random
                         </button>
-                        <button onclick="exportCurrentCSV()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-3xl font-medium flex items-center justify-center gap-3">
-                            <i class="fa-solid fa-download"></i> Export CSV
+                        <button onclick="exportCurrentCSV()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-sm font-medium flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Export
                         </button>
                     </div>
                 </div>
 
                 <!-- Filters -->
-                <div class="px-6 py-4 bg-gray-900 border-b border-gray-800 flex flex-wrap gap-4 items-center">
-                    <div class="flex gap-2">
-                        <button onclick="filterDifficulty('all')" id="filter-all" class="px-6 py-2 rounded-3xl bg-orange-500 text-white text-sm font-medium">All</button>
-                        <button onclick="filterDifficulty('EASY')" class="px-6 py-2 rounded-3xl text-emerald-400 text-sm font-medium">Easy</button>
-                        <button onclick="filterDifficulty('MEDIUM')" class="px-6 py-2 rounded-3xl text-amber-400 text-sm font-medium">Medium</button>
-                        <button onclick="filterDifficulty('HARD')" class="px-6 py-2 rounded-3xl text-red-400 text-sm font-medium">Hard</button>
-                    </div>
-                    <input id="table-search" placeholder="Search title or topics..." 
-                           class="flex-1 bg-gray-800 rounded-3xl px-6 py-3 text-sm focus:outline-none">
+                <div class="px-5 py-3 bg-gray-900 border-b border-gray-800 flex gap-2 items-center text-sm">
+                    <button onclick="filterDifficulty('all')" id="filter-all" class="px-5 py-1.5 rounded-3xl bg-orange-500 text-white">All</button>
+                    <button onclick="filterDifficulty('EASY')" class="px-5 py-1.5 rounded-3xl text-emerald-400">Easy</button>
+                    <button onclick="filterDifficulty('MEDIUM')" class="px-5 py-1.5 rounded-3xl text-amber-400">Medium</button>
+                    <button onclick="filterDifficulty('HARD')" class="px-5 py-1.5 rounded-3xl text-red-400">Hard</button>
+                    <input id="table-search" placeholder="Search..." 
+                           class="flex-1 bg-gray-800 rounded-3xl px-4 py-1.5 text-sm focus:outline-none">
                 </div>
 
                 <!-- Table -->
@@ -175,13 +160,12 @@
                     <div class="table-container">
                         <table id="problems-table" class="w-full text-sm">
                             <thead class="sticky top-0 bg-gray-900 z-10 border-b border-gray-700">
-                                <tr class="text-left text-xs uppercase text-gray-400">
-                                    <th onclick="sortTable(0)" class="px-4 py-5 cursor-pointer">Difficulty</th>
-                                    <th onclick="sortTable(1)" class="px-4 py-5 cursor-pointer">Problem</th>
-                                    <th onclick="sortTable(2)" class="px-4 py-5 cursor-pointer text-right">Frequency</th>
-                                    <th onclick="sortTable(3)" class="px-4 py-5 cursor-pointer text-right">Acceptance</th>
-                                    <th class="px-4 py-5">Topics</th>
-                                    <th class="w-16 text-center">Solved</th>
+                                <tr class="text-left text-xs text-gray-400">
+                                    <th onclick="sortTable(0)" class="px-3 py-3 cursor-pointer">Diff</th>
+                                    <th onclick="sortTable(1)" class="px-3 py-3 cursor-pointer">Problem</th>
+                                    <th onclick="sortTable(2)" class="px-3 py-3 cursor-pointer text-right">Freq</th>
+                                    <th onclick="sortTable(3)" class="px-3 py-3 cursor-pointer text-right">Accept</th>
+                                    <th class="px-3 py-3 w-12 text-center">Done</th>
                                 </tr>
                             </thead>
                             <tbody id="table-body" class="divide-y divide-gray-700"></tbody>
@@ -189,27 +173,29 @@
                     </div>
                 </div>
 
-                <!-- Interview Tips -->
-                <div class="border-t border-gray-800 bg-gray-900 p-6">
-                    <div onclick="toggleTips()" class="flex justify-between items-center cursor-pointer">
-                        <h3 class="font-semibold text-lg flex items-center gap-3">
-                            <i class="fa-solid fa-lightbulb text-yellow-400"></i> Interview Tips
-                        </h3>
-                        <span id="tips-arrow" class="text-2xl transition-transform">▼</span>
-                    </div>
-                    <div id="tips-content" class="hidden mt-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-                        <div>
-                            <h4 class="font-medium text-emerald-400 mb-3">General Tips</h4>
-                            <ul class="space-y-2 text-gray-400">
-                                <li>• Think aloud and explain your approach</li>
-                                <li>• Ask clarifying questions</li>
-                                <li>• Discuss time & space complexity</li>
-                                <li>• Handle edge cases</li>
-                            </ul>
+                <!-- Tips -->
+                <div class="border-t border-gray-800 bg-gray-900 p-4">
+                    <div onclick="toggleTips()" class="flex justify-between items-center cursor-pointer text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb text-yellow-400"></i>
+                            <span class="font-medium">Interview Tips</span>
                         </div>
-                        <div>
-                            <h4 class="font-medium text-emerald-400 mb-3">For <span id="tip-company" class="font-semibold"></span></h4>
-                            <p id="company-tip-text" class="text-gray-400"></p>
+                        <span id="tips-arrow" class="text-lg">▼</span>
+                    </div>
+                    <div id="tips-content" class="hidden mt-4 text-xs text-gray-400">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="text-emerald-400 mb-1">General</h4>
+                                <ul class="space-y-1">
+                                    <li>• Explain your thinking</li>
+                                    <li>• Ask clarifying questions</li>
+                                    <li>• Discuss complexity</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-emerald-400 mb-1">For <span id="tip-company" class="font-medium"></span></h4>
+                                <p id="company-tip-text" class="text-gray-400"></p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -217,13 +203,12 @@
         </div>
     </div>
 
-    <!-- Mobile Bottom Bar -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 py-4 text-center text-orange-400 font-medium cursor-pointer z-50" onclick="toggleMobileSidebar()">
-        <i class="fa-solid fa-bars"></i> Browse Companies
+    <!-- Mobile Bottom -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 py-3 text-center text-orange-400 text-sm cursor-pointer z-50" onclick="toggleMobileSidebar()">
+        <i class="fa-solid fa-bars"></i> Companies
     </div>
 
     <script>
-        // ==================== STATE ====================
         let allCompanies = [];
         let currentCompany = null;
         let currentPeriod = null;
@@ -234,50 +219,45 @@
         let lastDate = localStorage.getItem('lastDate') || '';
         let difficultyChart = null;
         let currentFilter = 'all';
-        let showUnsolvedOnly = false;
         let isDarkMode = true;
         let tipsOpen = false;
 
         const TIME_PERIODS = [
-            { label: "30 Days", file: "1. Thirty Days.csv" },
-            { label: "3 Months", file: "2. Three Months.csv" },
-            { label: "6 Months", file: "3. Six Months.csv" },
-            { label: ">6 Months", file: "4. More Than Six Months.csv" },
-            { label: "All Time", file: "All.csv" }
+            { label: "30D", file: "1. Thirty Days.csv" },
+            { label: "3M", file: "2. Three Months.csv" },
+            { label: "6M", file: "3. Six Months.csv" },
+            { label: ">6M", file: "4. More Than Six Months.csv" },
+            { label: "All", file: "All.csv" }
         ];
 
         const COMPANY_TIPS = {
-            "Meta": "Strong focus on Graphs, Dynamic Programming, and System Design.",
-            "Amazon": "Leadership Principles are heavily tested. Expect many medium questions.",
-            "Google": "Emphasis on optimization and hard algorithmic problems.",
-            "Microsoft": "System Design + OOP concepts are very common.",
-            "Apple": "Clean code and UI/UX related problems.",
-            "Default": "Explain your thought process clearly. Optimize when asked."
+            "Meta": "Focus on Graphs, DP & System Design.",
+            "Amazon": "Leadership Principles + Medium problems.",
+            "Google": "Optimization & Hard problems.",
+            "Default": "Explain clearly and optimize when asked."
         };
 
-        // ==================== HELPERS ====================
-        function getCompanyEmoji(company) {
-            const map = { "Meta": "📘", "Amazon": "📦", "Google": "🔍", "Microsoft": "🪟", "Apple": "🍎", "AQR Capital Management": "🏦" };
-            return map[company] || "🏢";
+        function getCompanyEmoji(c) {
+            const map = {"Meta":"📘","Amazon":"📦","Google":"🔍","Microsoft":"🪟","Apple":"🍎"};
+            return map[c] || "🏢";
         }
 
         function parseCSV(csv) {
             const lines = csv.trim().split('\n');
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g,''));
             const data = [];
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
-                const values = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g, '').trim());
+                const values = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g,'').trim());
                 if (values.length === headers.length) {
                     const obj = {};
-                    headers.forEach((h, idx) => obj[h] = values[idx]);
+                    headers.forEach((h, i) => obj[h] = values[i]);
                     data.push(obj);
                 }
             }
             return data;
         }
 
-        // ==================== THEME ====================
         function toggleTheme() {
             isDarkMode = !isDarkMode;
             document.documentElement.classList.toggle('dark', isDarkMode);
@@ -285,7 +265,6 @@
             localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         }
 
-        // ==================== DAILY GOAL ====================
         function setDailyGoal() {
             dailyGoal = parseInt(document.getElementById('daily-goal').value) || 5;
             localStorage.setItem('dailyGoal', dailyGoal);
@@ -297,12 +276,11 @@
             if (lastDate !== today) {
                 todaySolved = 0;
                 localStorage.setItem('lastDate', today);
-                localStorage.setItem('todaySolved', 0);
             }
             const percent = Math.min((todaySolved / dailyGoal) * 100, 100);
             document.getElementById('today-count').textContent = `${todaySolved} / ${dailyGoal}`;
             document.getElementById('today-bar').style.width = percent + '%';
-            document.getElementById('streak-text').innerHTML = todaySolved >= dailyGoal ? '🎉 Daily goal achieved!' : `Keep going! ${dailyGoal - todaySolved} more today`;
+            document.getElementById('streak-text').innerHTML = todaySolved >= dailyGoal ? '🎉 Goal Achieved!' : `+${dailyGoal - todaySolved} more`;
         }
 
         function incrementDailyCount() {
@@ -316,25 +294,24 @@
             updateDailyUI();
         }
 
-        // ==================== COMPANIES ====================
         async function loadCompanies() {
             try {
                 const res = await fetch('https://api.github.com/repos/liquidslr/interview-company-wise-problems/contents');
                 const data = await res.json();
-                allCompanies = data.filter(item => item.type === 'dir').map(item => item.name).sort();
+                allCompanies = data.filter(i => i.type === 'dir').map(i => i.name).sort();
             } catch (e) {
-                allCompanies = ["Meta","Amazon","Google","Microsoft","Apple","Netflix","Uber","LinkedIn","AMD","Accenture","AQR Capital Management"];
+                allCompanies = ["Meta","Amazon","Google","Microsoft","Apple","AQR Capital Management"];
             }
             renderCompanyList(allCompanies);
         }
 
-        function renderCompanyList(companies) {
+        function renderCompanyList(list) {
             const container = document.getElementById('company-list');
             container.innerHTML = '';
-            companies.forEach(company => {
+            list.forEach(company => {
                 const div = document.createElement('div');
-                div.className = `sidebar-link px-5 py-4 mx-2 rounded-3xl cursor-pointer flex items-center gap-3 ${currentCompany === company ? 'bg-orange-500 text-white' : 'hover:bg-gray-800'}`;
-                div.innerHTML = `<span class="text-2xl">${getCompanyEmoji(company)}</span><span class="font-medium">${company}</span>`;
+                div.className = `sidebar-link px-4 py-3 mx-1 rounded-2xl cursor-pointer flex items-center gap-3 ${currentCompany === company ? 'bg-orange-500 text-white' : 'hover:bg-gray-800'}`;
+                div.innerHTML = `<span class="text-xl">${getCompanyEmoji(company)}</span><span class="truncate">${company}</span>`;
                 div.onclick = () => selectCompany(company);
                 container.appendChild(div);
             });
@@ -346,7 +323,6 @@
             renderCompanyList(filtered);
         }
 
-        // ==================== SELECT COMPANY ====================
         async function selectCompany(company) {
             currentCompany = company;
             currentPeriod = TIME_PERIODS[0];
@@ -366,14 +342,14 @@
         function renderTimeTabs() {
             const container = document.getElementById('time-tabs');
             container.innerHTML = '';
-            TIME_PERIODS.forEach(period => {
+            TIME_PERIODS.forEach(p => {
                 const btn = document.createElement('button');
-                btn.className = `px-6 py-2 text-sm font-medium rounded-3xl transition-all ${currentPeriod.file === period.file ? 'bg-orange-500 text-white' : 'bg-gray-800 hover:bg-gray-700'}`;
-                btn.textContent = period.label;
+                btn.className = `px-4 py-1 text-xs rounded-3xl transition-all ${currentPeriod.file === p.file ? 'bg-orange-500 text-white' : 'bg-gray-800 hover:bg-gray-700'}`;
+                btn.textContent = p.label;
                 btn.onclick = () => {
-                    currentPeriod = period;
+                    currentPeriod = p;
                     renderTimeTabs();
-                    loadPeriodData(period);
+                    loadPeriodData(p);
                 };
                 container.appendChild(btn);
             });
@@ -390,11 +366,10 @@
                 renderStats();
                 renderTable(currentProblems);
             } catch (e) {
-                document.getElementById('table-body').innerHTML = `<tr><td colspan="6" class="text-center py-20 text-gray-400">No data available for this period</td></tr>`;
+                document.getElementById('table-body').innerHTML = `<tr><td colspan="5" class="text-center py-12 text-gray-400">No data found</td></tr>`;
             }
         }
 
-        // ==================== STATS & TABLE ====================
         function renderStats() {
             const easy = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'EASY').length;
             const medium = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'MEDIUM').length;
@@ -402,16 +377,16 @@
             const total = currentProblems.length || 1;
 
             document.getElementById('stats-bars').innerHTML = `
-                <div class="flex items-center gap-4"><span class="w-14 text-emerald-400">Easy</span><div class="flex-1 h-3 bg-gray-700 rounded-full"><div class="difficulty-easy h-3" style="width:${(easy/total)*100}%"></div></div><span class="font-mono">${easy}</span></div>
-                <div class="flex items-center gap-4"><span class="w-14 text-amber-400">Medium</span><div class="flex-1 h-3 bg-gray-700 rounded-full"><div class="difficulty-medium h-3" style="width:${(medium/total)*100}%"></div></div><span class="font-mono">${medium}</span></div>
-                <div class="flex items-center gap-4"><span class="w-14 text-red-400">Hard</span><div class="flex-1 h-3 bg-gray-700 rounded-full"><div class="difficulty-hard h-3" style="width:${(hard/total)*100}%"></div></div><span class="font-mono">${hard}</span></div>
+                <div class="flex items-center gap-3 text-xs"><span class="w-10 text-emerald-400">Easy</span><div class="flex-1 h-2 bg-gray-700 rounded"><div class="difficulty-easy h-2" style="width:${(easy/total)*100}%"></div></div><span>${easy}</span></div>
+                <div class="flex items-center gap-3 text-xs"><span class="w-10 text-amber-400">Medium</span><div class="flex-1 h-2 bg-gray-700 rounded"><div class="difficulty-medium h-2" style="width:${(medium/total)*100}%"></div></div><span>${medium}</span></div>
+                <div class="flex items-center gap-3 text-xs"><span class="w-10 text-red-400">Hard</span><div class="flex-1 h-2 bg-gray-700 rounded"><div class="difficulty-hard h-2" style="width:${(hard/total)*100}%"></div></div><span>${hard}</span></div>
             `;
 
             if (difficultyChart) difficultyChart.destroy();
             difficultyChart = new Chart(document.getElementById('difficulty-chart'), {
                 type: 'doughnut',
-                data: { labels: ['Easy','Medium','Hard'], datasets: [{ data: [easy, medium, hard], backgroundColor: ['#10b981', '#eab308', '#ef4444'] }] },
-                options: { cutout: 65, plugins: { legend: { display: false } } }
+                data: { labels: ['Easy','Medium','Hard'], datasets: [{ data: [easy,medium,hard], backgroundColor: ['#10b981','#eab308','#ef4444'] }] },
+                options: { cutout: 55, plugins: { legend: { display: false } } }
             });
 
             updateSolvedCount();
@@ -449,7 +424,6 @@
 
             let filtered = problems;
             if (currentFilter !== 'all') filtered = filtered.filter(p => (p.Difficulty || '').toUpperCase() === currentFilter);
-            if (showUnsolvedOnly) filtered = filtered.filter(p => !solvedSet.has(p.Title || p['Problem Title']));
 
             filtered.forEach(p => {
                 const title = p.Title || p['Problem Title'] || 'Untitled';
@@ -457,12 +431,11 @@
                 const row = document.createElement('tr');
                 row.className = 'table-row';
                 row.innerHTML = `
-                    <td class="px-4 py-4"><span class="px-4 py-1 text-xs font-bold rounded-3xl text-white ${p.Difficulty === 'EASY' ? 'difficulty-easy' : p.Difficulty === 'MEDIUM' ? 'difficulty-medium' : 'difficulty-hard'}">${p.Difficulty || '—'}</span></td>
-                    <td class="px-4 py-4 font-medium"><a href="${p.Link || '#'}" target="_blank" class="hover:text-orange-400">${title} ↗</a></td>
-                    <td class="px-4 py-4 text-right font-mono">${parseFloat(p.Frequency || 0).toFixed(1)}</td>
-                    <td class="px-4 py-4 text-right font-mono">${(parseFloat(p['Acceptance Rate'] || 0) * 100).toFixed(1)}%</td>
-                    <td class="px-4 py-4 text-xs">${(p.Topics || '').split(',').map(t => `<span class="bg-gray-800 px-2 py-px rounded">${t.trim()}</span>`).join(' ')}</td>
-                    <td class="px-4 py-4 text-center"><input type="checkbox" ${isSolved ? 'checked' : ''} onchange="toggleSolved('${title}', this.checked)" class="w-5 h-5 accent-emerald-400 cursor-pointer"></td>
+                    <td class="px-3 py-3"><span class="px-3 py-0.5 text-[10px] font-bold rounded text-white ${p.Difficulty === 'EASY' ? 'difficulty-easy' : p.Difficulty === 'MEDIUM' ? 'difficulty-medium' : 'difficulty-hard'}">${p.Difficulty || ''}</span></td>
+                    <td class="px-3 py-3 text-sm"><a href="${p.Link || '#'}" target="_blank" class="hover:text-orange-400">${title}</a></td>
+                    <td class="px-3 py-3 text-right text-xs font-mono">${parseFloat(p.Frequency || 0).toFixed(1)}</td>
+                    <td class="px-3 py-3 text-right text-xs font-mono">${(parseFloat(p['Acceptance Rate'] || 0)*100).toFixed(1)}%</td>
+                    <td class="px-3 py-3 text-center"><input type="checkbox" ${isSolved ? 'checked' : ''} onchange="toggleSolved('${title}', this.checked)" class="w-4 h-4 accent-emerald-400"></td>
                 `;
                 tbody.appendChild(row);
             });
@@ -478,27 +451,25 @@
             tipsOpen = !tipsOpen;
             document.getElementById('tips-content').classList.toggle('hidden', !tipsOpen);
             document.getElementById('tips-arrow').style.transform = tipsOpen ? 'rotate(180deg)' : '';
-            const tipText = COMPANY_TIPS[currentCompany] || COMPANY_TIPS.Default;
-            document.getElementById('company-tip-text').innerHTML = tipText;
+            document.getElementById('company-tip-text').textContent = COMPANY_TIPS[currentCompany] || COMPANY_TIPS.Default;
         }
 
-        // ==================== UTILITIES ====================
         function pickRandomProblem() {
-            if (!currentProblems.length) return alert("No problems loaded yet");
+            if (!currentProblems.length) return alert("No problems loaded");
             const random = currentProblems[Math.floor(Math.random() * currentProblems.length)];
             if (random.Link) window.open(random.Link, '_blank');
         }
 
         function exportCurrentCSV() {
-            if (!currentProblems.length) return alert("No data to export");
+            if (!currentProblems.length) return alert("No data");
             let csv = "Difficulty,Title,Frequency,Acceptance Rate,Link,Topics\n";
             currentProblems.forEach(p => {
-                csv += `"${p.Difficulty || ''}","${p.Title || p['Problem Title'] || ''}",${p.Frequency || 0},${p['Acceptance Rate'] || 0},"${p.Link || ''}","${p.Topics || ''}"\n`;
+                csv += `"${p.Difficulty || ''}","${p.Title || ''}",${p.Frequency || 0},${p['Acceptance Rate'] || 0},"${p.Link || ''}","${p.Topics || ''}"\n`;
             });
             const blob = new Blob([csv], { type: 'text/csv' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = `${currentCompany || 'problems'}_list.csv`;
+            a.download = `${currentCompany}_problems.csv`;
             a.click();
         }
 
@@ -506,7 +477,7 @@
             document.getElementById('sidebar').classList.toggle('hidden');
         }
 
-        function sortTable(col) {
+        function sortTable() {
             alert("Sorting coming soon!");
         }
 
@@ -514,28 +485,21 @@
         window.onload = async () => {
             await loadCompanies();
 
-            if (localStorage.getItem('theme') === 'light') {
-                isDarkMode = false;
-                document.documentElement.classList.remove('dark');
-                document.getElementById('theme-toggle').innerHTML = '🌙';
-            } else {
-                document.documentElement.classList.add('dark');
-            }
+            // Force dark mode
+            document.documentElement.classList.add('dark');
+            document.getElementById('theme-toggle').innerHTML = '☀️';
 
             document.getElementById('daily-goal').value = dailyGoal;
             updateDailyUI();
 
-            // Global Search
             document.getElementById('global-search').addEventListener('input', (e) => {
                 if (!currentProblems.length) return;
                 const term = e.target.value.toLowerCase();
-                const filtered = currentProblems.filter(p => 
-                    (p.Title || p['Problem Title'] || '').toLowerCase().includes(term)
-                );
+                const filtered = currentProblems.filter(p => (p.Title || '').toLowerCase().includes(term));
                 renderTable(filtered);
             });
 
-            console.log('%c✅ CompanyWise Pro loaded successfully!', 'color:#f59e0b; font-weight:bold');
+            console.log('%c✅ CompanyWise Pro - Compact Dark Mode Ready', 'color:#f59e0b; font-weight:bold');
         };
     </script>
 </body>
