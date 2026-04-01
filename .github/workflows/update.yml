@@ -1,38 +1,16 @@
 name: Update LeetCode Data
-
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: '0 0 1 * *'   # 1st of every month
+  workflow_dispatch:     
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install requests
-        run: pip install requests
-
-      - name: Run script
-        run: |
-          python scripts/update_company.py "Amazon"
-          python scripts/update_company.py "Google"
-          python scripts/update_company.py "Microsoft"
-
-      - name: Debug files
-        run: ls -R
-
+      - uses: actions/checkout@v4
+      - name: Update Amazon (example)
+        run: python scripts/update_company.py "Amazon"
+  
       - name: Commit & Push
         uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "update leetcode company data"
