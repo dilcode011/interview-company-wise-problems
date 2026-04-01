@@ -9,7 +9,7 @@ from datetime import datetime
 LEETCODE_GRAPHQL = "https://leetcode.com/graphql"
 
 
-def fetch_company_problems(company: str):
+def fetch_company_problems(company):
     slug = company.lower().replace(" ", "-").replace(".", "")
 
     query = """
@@ -29,40 +29,26 @@ def fetch_company_problems(company: str):
     }
     """
 
-    try:
-        response = requests.post(
-            LEETCODE_GRAPHQL,
-            json={"query": query, "variables": {"slug": slug}},
-            headers={"Content-Type": "application/json"},
-            timeout=30
-        )
+    response = requests.post(
+        LEETCODE_GRAPHQL,
+        json={"query": query, "variables": {"slug": slug}},
+        headers={"Content-Type": "application/json"},
+        timeout=30
+    )
 
-        response.raise_for_status()
-        data = response.json()
-
-        questions = data.get("data", {}).get("companyTag", {}).get("questions", [])
-
-        if not questions:
-            print(f"No data found for {company}")
-            return []
-
-        print(f"Fetched {len(questions)} problems for {company}")
-        return questions
-
-    except Exception as e:
-        print(f"Error: {e}")
-        return []
+    data = response.json()
+    return data.get("data", {}).get("companyTag", {}).get("questions", [])
 
 
-def save_to_csv(company: str, questions: list):
+def save_to_csv(company, questions):
     if not questions:
+        print(f"No data for {company}")
         return
 
+    # ✅ Folder = Company Name (IMPORTANT)
+    os.makedirs(company, exist_ok=True)
 
-    folder = company
-    os.makedirs(folder, exist_ok=True)
-
-    file_path = os.path.join(folder, "problems.csv")
+    file_path = f"{company}/problems.csv"
 
     with open(file_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -86,15 +72,17 @@ def save_to_csv(company: str, questions: list):
                 datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             ])
 
-    print(f"Saved → {file_path}")
+    print(f"Saved: {file_path}")
 
 
 def main():
     if len(sys.argv) < 2:
         print("Usage: python update_company.py 'Amazon'")
-        sys.exit(1)
+        return
 
     company = sys.argv[1]
+    print(f"Updating {company}...")
+
     questions = fetch_company_problems(company)
     save_to_csv(company, questions)
 
