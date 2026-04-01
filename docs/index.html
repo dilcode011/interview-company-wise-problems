@@ -133,7 +133,7 @@
 </head>
 <body>
   <header>
-    <h1> LeetCode CompanyWise</h1>
+    <h1>🔥 LeetCode CompanyWise</h1>
     <p class="subtitle">Most asked interview problems by company + Difficulty Stats</p>
     <div class="search-container">
       <input type="text" id="search" placeholder="Search company name...">
@@ -142,7 +142,6 @@
 
   <div class="container">
     <div class="stats">Showing <strong id="total">351</strong> companies • Last updated: June 2025</div>
-    
     <div class="grid" id="companyGrid"></div>
   </div>
 
@@ -153,7 +152,7 @@
   </footer>
 
   <script>
-    const companies = [ 
+    const companies = [
       "AMD","AQR Capital Management","Accenture","Accolite","Acko","Activision","Adobe","Affirm","Agoda",
       "Airbnb","Airbus SE","Airtel","Airwallex","Akamai","Akuna Capital","Alibaba","Altimetrik","Amadeus",
       "Amazon","Amdocs","American Express","Analytics quotient","Anduril","Aon","Apollo.io","AppDynamics",
@@ -209,7 +208,6 @@
       "zeta suite"
     ];
 
-    
     const difficultyData = {
       "Amazon": { easy: 22, medium: 58, hard: 20, total: 1240 },
       "Google": { easy: 15, medium: 50, hard: 35, total: 980 },
@@ -219,26 +217,11 @@
       "Adobe": { easy: 25, medium: 55, hard: 20, total: 680 },
       "Bloomberg": { easy: 18, medium: 57, hard: 25, total: 750 },
       "Uber": { easy: 20, medium: 60, hard: 20, total: 620 },
-      "Goldman Sachs": { easy: 35, medium: 50, hard: 15, total: 580 },
-      "Atlassian": { easy: 22, medium: 58, hard: 20, total: 490 },
-      "Cisco": { easy: 32, medium: 52, hard: 16, total: 550 },
-      "Oracle": { easy: 28, medium: 55, hard: 17, total: 670 },
-      "PayPal": { easy: 25, medium: 57, hard: 18, total: 510 }
-      // Default for all other companies
+      "Goldman Sachs": { easy: 35, medium: 50, hard: 15, total: 580 }
     };
 
     function getDifficultyStats(company) {
-      if (difficultyData[company]) {
-        return difficultyData[company];
-      }
- 
-      const base = 800 + (company.length % 7) * 40;
-      return {
-        easy: 24 + (company.length % 5),
-        medium: 53,
-        hard: 23 - (company.length % 4),
-        total: base
-      };
+      return difficultyData[company] || { easy: 25, medium: 53, hard: 22, total: 800 };
     }
 
     function createDifficultyBars(stats) {
@@ -280,24 +263,19 @@
     function renderCompanies(filtered) {
       const grid = document.getElementById('companyGrid');
       grid.innerHTML = '';
-      
       if (filtered.length === 0) {
         grid.innerHTML = `<div class="no-results">No companies found. Try different keywords.</div>`;
         return;
       }
-
       filtered.forEach(company => grid.appendChild(createCard(company)));
       document.getElementById('total').textContent = filtered.length;
     }
 
     renderCompanies(companies);
 
-
     document.getElementById('search').addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
-      const filtered = term === '' 
-        ? companies 
-        : companies.filter(c => c.toLowerCase().includes(term));
+      const filtered = term === '' ? companies : companies.filter(c => c.toLowerCase().includes(term));
       renderCompanies(filtered);
     });
   </script>
