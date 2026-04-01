@@ -1,6 +1,3 @@
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 name: Update LeetCode Data
 
 on:
@@ -15,29 +12,24 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # Debug: See exact folder structure (helpful for first run)
-      - name: Debug Folder Structure
-        run: |
-          pwd
-          ls -la
-          echo "=== Inside the repo folder ==="
-          ls -la interview-company-wise-problems || echo "Folder not found"
+      - name: Install dependencies
+        run: pip install requests
 
-      # ✅ Correct path (double folder)
-      - name: Update Company Data - Amazon
+      - name: Run script
         run: |
-          cd interview-company-wise-problems/interview-company-wise-problems
           python scripts/update_company.py "Amazon"
+          python scripts/update_company.py "Google"
+          python scripts/update_company.py "Microsoft"
 
-      - name: Commit & Push changes
+      - name: Commit & Push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: update LeetCode company-wise problems data"
+          commit_message: "chore: update company problems data"
