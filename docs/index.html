@@ -10,8 +10,8 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
         body { font-family: 'Inter', system_ui, sans-serif; }
-        .table-row:hover { background-color: rgb(31 41 55); }
-        .dark .table-row:hover { background-color: rgb(55 65 81); }
+        .table-row:hover { background-color: #1f2937; }
+        .dark .table-row:hover { background-color: #374151; }
         .sidebar-link { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
         .difficulty-easy { background-color: #10b981; }
         .difficulty-medium { background-color: #eab308; }
@@ -24,21 +24,20 @@
     <nav class="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
         <div class="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
-                <div class="w-9 h-9 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-white text-2xl shadow-inner">🔥</div>
-                <h1 class="text-2xl font-semibold tracking-tight">CompanyWise <span class="text-orange-500">Pro</span></h1>
+                <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-white text-3xl">🔥</div>
+                <h1 class="text-3xl font-semibold tracking-tight">CompanyWise <span class="text-orange-500">Pro</span></h1>
             </div>
 
             <div class="flex-1 max-w-xl mx-8">
-                <div class="relative">
-                    <input id="global-search" type="text" placeholder="Search problems..." 
-                           class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-3xl px-6 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                    <i class="fa-solid fa-magnifying-glass absolute left-5 top-3.5 text-gray-400"></i>
-                </div>
+                <input id="global-search" type="text" placeholder="Search problems..." 
+                       class="w-full bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-3xl px-6 py-3 pl-12 focus:outline-none focus:ring-2 focus:ring-orange-500">
             </div>
 
             <div class="flex items-center gap-x-4">
-                <button onclick="toggleTheme()" id="theme-toggle" class="w-10 h-10 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-2xl text-xl">🌙</button>
-                <a href="https://github.com/liquidslr/interview-company-wise-problems" target="_blank" class="flex items-center gap-x-2 px-5 py-2.5 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-3xl text-sm font-medium">
+                <button onclick="toggleTheme()" id="theme-toggle" 
+                        class="w-11 h-11 flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-2xl text-2xl transition-all">🌙</button>
+                <a href="https://github.com/liquidslr/interview-company-wise-problems" target="_blank"
+                   class="flex items-center gap-x-2 px-6 py-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-3xl text-sm font-medium">
                     <i class="fa-brands fa-github"></i> Source
                 </a>
             </div>
@@ -48,30 +47,30 @@
     <div class="max-w-screen-2xl mx-auto flex h-[calc(100vh-73px)] overflow-hidden">
         <!-- Sidebar -->
         <div id="sidebar" class="w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col md:block hidden">
-            <div class="p-5 border-b dark:border-gray-800">
-                <h2 class="font-semibold text-lg mb-3">Companies</h2>
-                <input id="company-search" type="text" placeholder="Filter companies..." onkeyup="filterCompanies()" 
+            <div class="p-6 border-b dark:border-gray-800">
+                <h2 class="font-semibold text-xl mb-4">Companies</h2>
+                <input id="company-search" type="text" placeholder="Filter companies..." 
+                       onkeyup="filterCompanies()" 
                        class="w-full bg-gray-100 dark:bg-gray-800 rounded-3xl px-5 py-3 text-sm focus:outline-none">
             </div>
-            <div id="company-list" class="flex-1 overflow-y-auto p-3 space-y-1 text-sm"></div>
+            <div id="company-list" class="flex-1 overflow-y-auto p-3 space-y-1"></div>
 
             <!-- Daily Goal -->
-            <div class="p-5 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
-                <h3 class="text-sm font-medium mb-3 flex items-center gap-2"><i class="fa-solid fa-target"></i> Daily Goal</h3>
-                <div class="flex items-center gap-3">
-                    <input id="daily-goal-input" type="number" value="5" min="1" max="50"
-                           class="w-20 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-2xl px-4 py-2 text-center focus:outline-none">
-                    <button onclick="saveDailyGoal()" class="px-5 py-2 bg-emerald-600 text-white rounded-2xl text-sm">Set Goal</button>
+            <div class="p-6 border-t dark:border-gray-800 bg-gray-50 dark:bg-gray-950">
+                <h3 class="font-medium mb-3 flex items-center gap-2"><i class="fa-solid fa-target text-orange-500"></i> Daily Goal</h3>
+                <div class="flex gap-3">
+                    <input id="daily-goal" type="number" value="5" min="1" class="w-20 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-2xl px-4 py-2 text-center">
+                    <button onclick="setDailyGoal()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl text-sm font-medium">Set Goal</button>
                 </div>
-                <div id="daily-progress" class="mt-4 bg-white dark:bg-gray-900 rounded-2xl p-4">
+                <div id="daily-progress" class="mt-5 bg-white dark:bg-gray-900 rounded-2xl p-4">
                     <div class="flex justify-between text-sm mb-2">
-                        <span>Today's Progress</span>
+                        <span>Today</span>
                         <span id="today-count">0 / 5</span>
                     </div>
-                    <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full">
-                        <div id="today-progress-bar" class="h-2 bg-emerald-500 rounded-full transition-all" style="width: 0%"></div>
+                    <div class="h-2.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div id="today-bar" class="h-2.5 bg-emerald-500 rounded-full transition-all" style="width: 0%"></div>
                     </div>
-                    <div id="streak-info" class="text-xs text-emerald-500 mt-3 flex items-center gap-1"></div>
+                    <div id="streak-text" class="text-xs text-emerald-500 mt-3"></div>
                 </div>
             </div>
         </div>
@@ -79,118 +78,108 @@
         <!-- Main Content -->
         <div class="flex-1 flex flex-col overflow-hidden">
             <!-- Welcome -->
-            <div id="welcome-screen" class="flex-1 flex items-center justify-center p-8">
-                <div class="text-center max-w-md">
+            <div id="welcome-screen" class="flex-1 flex items-center justify-center">
+                <div class="text-center">
                     <div class="text-8xl mb-6">🔥</div>
                     <h2 class="text-4xl font-semibold mb-3">LeetCode CompanyWise Pro</h2>
-                    <p class="text-gray-600 dark:text-gray-400">Daily goals • Progress tracking • Interview tips • Mobile friendly</p>
-                    <div class="mt-10 text-xs text-gray-400">Made with ❤️ by Arshpreet</div>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8">Daily goals • Progress tracking • Interview tips</p>
+                    <p class="text-sm text-gray-500">Made with ❤️ by Arshpreet</p>
                 </div>
             </div>
 
             <!-- Company View -->
             <div id="company-view" class="flex-1 hidden flex-col">
                 <!-- Header -->
-                <div class="px-6 py-5 border-b dark:border-gray-800 flex flex-col sm:flex-row sm:items-center gap-4 bg-white dark:bg-gray-900">
-                    <div class="flex items-center gap-x-4">
-                        <div id="company-icon" class="w-12 h-12 text-4xl flex items-center justify-center rounded-3xl"></div>
+                <div class="px-8 py-6 border-b dark:border-gray-800 bg-white dark:bg-gray-900 flex flex-col md:flex-row md:items-center gap-6">
+                    <div class="flex items-center gap-4">
+                        <div id="company-icon" class="w-14 h-14 text-4xl flex items-center justify-center rounded-3xl"></div>
                         <div>
                             <h1 id="company-name" class="text-3xl font-semibold"></h1>
-                            <p id="total-problems" class="text-sm text-gray-500 dark:text-gray-400"></p>
+                            <p id="total-problems" class="text-gray-500 dark:text-gray-400"></p>
                         </div>
                     </div>
-                    <div id="time-tabs" class="flex flex-wrap gap-2 flex-1 justify-end"></div>
+                    <div id="time-tabs" class="flex flex-wrap gap-2 md:ml-auto"></div>
                 </div>
 
-                <!-- Stats Row -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 bg-gray-50 dark:bg-gray-950 border-b dark:border-gray-800">
+                <!-- Stats -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 p-8 bg-gray-50 dark:bg-gray-950 border-b dark:border-gray-800">
                     <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
-                        <p class="text-sm text-gray-500 mb-4">Difficulty Distribution</p>
+                        <p class="text-gray-500 mb-4">Difficulty Distribution</p>
                         <div id="stats-bars" class="space-y-4"></div>
-                        <canvas id="difficulty-chart" height="110"></canvas>
+                        <canvas id="difficulty-chart" height="120"></canvas>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
-                        <p class="text-sm text-gray-500">Progress in this list</p>
-                        <div class="flex items-center justify-center gap-8 my-6">
+                    <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 flex flex-col">
+                        <p class="text-gray-500">Progress</p>
+                        <div class="flex-1 flex items-center justify-center gap-6">
                             <div class="text-center">
                                 <span id="solved-count" class="text-6xl font-semibold text-emerald-500">0</span>
                                 <span id="solved-total" class="text-3xl text-gray-400">/ 0</span>
                             </div>
-                            <div id="progress-circle" class="text-5xl font-light text-emerald-500">0%</div>
-                        </div>
-                        <div class="flex gap-3">
-                            <button onclick="exportCurrentCSV()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-3xl text-sm flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-download"></i> Export
-                            </button>
-                            <button onclick="pickRandomProblem()" class="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white rounded-3xl text-sm flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-dice"></i> Random
-                            </button>
+                            <div id="progress-percent" class="text-6xl font-light text-emerald-500">0%</div>
                         </div>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-900 rounded-3xl p-6">
-                        <p class="text-sm text-gray-500 mb-4">Quick Controls</p>
-                        <div class="flex flex-col gap-3">
-                            <button onclick="toggleUnsolvedFilter()" id="unsolved-btn" class="py-3 text-sm font-medium border border-gray-300 dark:border-gray-600 rounded-3xl">Show Unsolved Only</button>
-                            <button onclick="markAllSolved()" class="py-3 text-sm font-medium border border-emerald-300 dark:border-emerald-600 text-emerald-500 rounded-3xl">Mark All Solved</button>
-                            <button onclick="clearSolved()" class="py-3 text-sm font-medium border border-red-300 dark:border-red-600 text-red-500 rounded-3xl">Reset Solved</button>
-                        </div>
+                    <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 space-y-4">
+                        <button onclick="pickRandomProblem()" class="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-3xl font-medium flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-dice"></i> Pick Random Problem
+                        </button>
+                        <button onclick="exportCurrentCSV()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-3xl font-medium flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-download"></i> Export as CSV
+                        </button>
                     </div>
                 </div>
 
-                <!-- Table Header -->
-                <div class="px-6 py-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 flex gap-4 items-center">
+                <!-- Filters -->
+                <div class="px-8 py-4 bg-white dark:bg-gray-900 border-b dark:border-gray-800 flex flex-wrap gap-4 items-center">
                     <div class="flex gap-2">
-                        <button onclick="filterDifficulty('all')" id="filter-all" class="px-6 py-2 rounded-3xl text-sm font-medium bg-orange-500 text-white">All</button>
-                        <button onclick="filterDifficulty('EASY')" class="px-6 py-2 rounded-3xl text-sm font-medium text-emerald-500">Easy</button>
-                        <button onclick="filterDifficulty('MEDIUM')" class="px-6 py-2 rounded-3xl text-sm font-medium text-amber-500">Medium</button>
-                        <button onclick="filterDifficulty('HARD')" class="px-6 py-2 rounded-3xl text-sm font-medium text-red-500">Hard</button>
+                        <button onclick="filterDifficulty('all')" id="filter-all" class="px-6 py-2 rounded-3xl bg-orange-500 text-white text-sm font-medium">All</button>
+                        <button onclick="filterDifficulty('EASY')" class="px-6 py-2 rounded-3xl text-emerald-600 text-sm font-medium">Easy</button>
+                        <button onclick="filterDifficulty('MEDIUM')" class="px-6 py-2 rounded-3xl text-amber-600 text-sm font-medium">Medium</button>
+                        <button onclick="filterDifficulty('HARD')" class="px-6 py-2 rounded-3xl text-red-600 text-sm font-medium">Hard</button>
                     </div>
-                    <input id="table-search" placeholder="Search in this list..." class="flex-1 bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-3 text-sm">
+                    <input id="table-search" placeholder="Search title or topics..." 
+                           class="flex-1 bg-gray-100 dark:bg-gray-800 rounded-3xl px-6 py-3 text-sm">
                 </div>
 
-                <!-- Problems Table -->
-                <div class="flex-1 overflow-auto p-6 pt-2">
+                <!-- Table -->
+                <div class="flex-1 overflow-auto p-8 pt-2">
                     <table id="problems-table" class="w-full text-sm">
-                        <thead class="sticky top-0 bg-white dark:bg-gray-900 z-10">
-                            <tr class="text-left text-xs uppercase text-gray-500 border-b dark:border-gray-700">
+                        <thead class="sticky top-0 bg-white dark:bg-gray-900 z-10 border-b dark:border-gray-700">
+                            <tr class="text-left text-xs uppercase text-gray-500">
                                 <th onclick="sortTable(0)" class="px-4 py-5 cursor-pointer">Difficulty</th>
                                 <th onclick="sortTable(1)" class="px-4 py-5 cursor-pointer">Problem</th>
-                                <th onclick="sortTable(2)" class="px-4 py-5 cursor-pointer text-right">Freq</th>
-                                <th onclick="sortTable(3)" class="px-4 py-5 cursor-pointer text-right">Accept %</th>
+                                <th onclick="sortTable(2)" class="px-4 py-5 cursor-pointer text-right">Frequency</th>
+                                <th onclick="sortTable(3)" class="px-4 py-5 cursor-pointer text-right">Acceptance</th>
                                 <th class="px-4 py-5">Topics</th>
-                                <th class="w-12 text-center">Solved</th>
+                                <th class="w-16 text-center">Solved</th>
                             </tr>
                         </thead>
                         <tbody id="table-body" class="divide-y divide-gray-200 dark:divide-gray-700"></tbody>
                     </table>
                 </div>
 
-                <!-- Interview Tips Section -->
-                <div class="border-t dark:border-gray-800 bg-white dark:bg-gray-900 p-6">
-                    <div onclick="toggleTips()" class="flex items-center justify-between cursor-pointer">
-                        <h3 class="font-semibold flex items-center gap-2"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Interview Tips & Advice</h3>
-                        <span id="tips-arrow" class="text-xl transition-transform">▼</span>
+                <!-- Interview Tips -->
+                <div class="border-t dark:border-gray-800 bg-white dark:bg-gray-900 p-8">
+                    <div onclick="toggleTips()" class="flex justify-between items-center cursor-pointer">
+                        <h3 class="font-semibold text-lg flex items-center gap-3">
+                            <i class="fa-solid fa-lightbulb text-yellow-500"></i> Interview Tips
+                        </h3>
+                        <span id="tips-arrow" class="text-2xl transition-transform">▼</span>
                     </div>
-                    <div id="tips-content" class="hidden mt-6 space-y-6 text-sm">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 class="font-medium mb-3 text-emerald-600">General Tips</h4>
-                                <ul class="space-y-2 text-gray-600 dark:text-gray-400">
-                                    <li>• Explain your thought process clearly before coding</li>
-                                    <li>• Ask clarifying questions about constraints</li>
-                                    <li>• Discuss time & space complexity</li>
-                                    <li>• Handle edge cases properly</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-3 text-emerald-600">Company-Specific Strategy</h4>
-                                <ul id="company-tips" class="space-y-2 text-gray-600 dark:text-gray-400"></ul>
-                            </div>
+                    <div id="tips-content" class="hidden mt-6 grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
+                        <div>
+                            <h4 class="font-medium text-emerald-600 mb-3">General Tips</h4>
+                            <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                                <li>• Think aloud and explain your approach</li>
+                                <li>• Ask clarifying questions</li>
+                                <li>• Discuss time & space complexity</li>
+                                <li>• Handle edge cases</li>
+                            </ul>
                         </div>
-                        <div class="text-xs text-gray-400 border-t dark:border-gray-700 pt-4">
-                            Pro Tip: Consistent daily practice (even 3-5 problems) beats cramming. Track your streak!
+                        <div>
+                            <h4 class="font-medium text-emerald-600 mb-3">For <span id="tip-company" class="font-semibold"></span></h4>
+                            <p id="company-tip-text" class="text-gray-600 dark:text-gray-400"></p>
                         </div>
                     </div>
                 </div>
@@ -198,26 +187,26 @@
         </div>
     </div>
 
-    <!-- Mobile Bottom Nav -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t dark:border-gray-800 z-50 py-4 text-center text-orange-500 font-medium" onclick="toggleMobileSidebar()">
-        <i class="fa-solid fa-bars"></i> Browse Companies
+    <!-- Mobile Bottom Bar -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t dark:border-gray-800 py-4 text-center text-orange-500 font-medium cursor-pointer" onclick="toggleMobileSidebar()">
+        <i class="fa-solid fa-bars"></i> Companies
     </div>
 
     <script>
         // ==================== STATE ====================
-        let allCompanies = []
-        let currentCompany = null
-        let currentPeriod = null
-        let currentProblems = []
-        let solvedProblems = JSON.parse(localStorage.getItem('solvedProblems')) || {}
-        let dailyGoal = parseInt(localStorage.getItem('dailyGoal')) || 5
-        let todaySolved = parseInt(localStorage.getItem('todaySolved')) || 0
-        let lastDate = localStorage.getItem('lastDate') || ''
-        let difficultyChart = null
-        let currentDifficultyFilter = 'all'
-        let showUnsolvedOnly = false
-        let isDark = true
-        let tipsOpen = false
+        let allCompanies = [];
+        let currentCompany = null;
+        let currentPeriod = null;
+        let currentProblems = [];
+        let solvedProblems = JSON.parse(localStorage.getItem('solvedProblems')) || {};
+        let dailyGoal = parseInt(localStorage.getItem('dailyGoal')) || 5;
+        let todaySolved = parseInt(localStorage.getItem('todaySolved')) || 0;
+        let lastDate = localStorage.getItem('lastDate') || '';
+        let difficultyChart = null;
+        let currentFilter = 'all';
+        let showUnsolvedOnly = false;
+        let isDarkMode = true;
+        let tipsOpen = false;
 
         const TIME_PERIODS = [
             { label: "30 Days", file: "1. Thirty Days.csv" },
@@ -225,308 +214,321 @@
             { label: "6 Months", file: "3. Six Months.csv" },
             { label: ">6 Months", file: "4. More Than Six Months.csv" },
             { label: "All Time", file: "All.csv" }
-        ]
+        ];
 
         const COMPANY_TIPS = {
-            "Meta": "Focus on Graph, DP, and System Design. Practice medium-hard problems.",
-            "Amazon": "Leadership Principles are very important. Expect many medium problems.",
-            "Google": "Strong emphasis on algorithms + optimization. Be ready for hard problems.",
-            "Microsoft": "System Design + OOP concepts frequently asked.",
-            "Apple": "Focus on clean code and UI-related problems.",
-            "Default": "Practice explaining your solution clearly and optimize when asked."
+            "Meta": "Strong focus on Graphs, Dynamic Programming, and System Design. Practice medium-hard problems.",
+            "Amazon": "Leadership Principles are heavily tested. Expect many medium-level questions.",
+            "Google": "Emphasis on optimization and hard algorithmic problems.",
+            "Microsoft": "System Design + OOP concepts are very common.",
+            "Apple": "Clean code and UI/UX related problems are important.",
+            "Default": "Explain your thought process clearly. Optimize when asked."
+        };
+
+        // ==================== HELPER FUNCTIONS ====================
+        function getCompanyEmoji(company) {
+            const emojis = { "Meta": "📘", "Amazon": "📦", "Google": "🔍", "Microsoft": "🪟", "Apple": "🍎" };
+            return emojis[company] || "🏢";
         }
 
-        // ==================== INIT ====================
-        function initTailwind() {
-            tailwind.config = {}
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                const values = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(v => v.replace(/^"|"$/g, '').trim());
+                if (values.length === headers.length) {
+                    const obj = {};
+                    headers.forEach((h, idx) => obj[h] = values[idx]);
+                    data.push(obj);
+                }
+            }
+            return data;
         }
 
         // ==================== THEME ====================
         function toggleTheme() {
-            isDark = !isDark
-            document.documentElement.classList.toggle('dark', isDark)
-            document.getElementById('theme-toggle').innerHTML = isDark ? '☀️' : '🌙'
-            localStorage.setItem('theme', isDark ? 'dark' : 'light')
+            isDarkMode = !isDarkMode;
+            document.documentElement.classList.toggle('dark', isDarkMode);
+            document.getElementById('theme-toggle').innerHTML = isDarkMode ? '☀️' : '🌙';
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         }
 
         // ==================== DAILY GOAL ====================
-        function saveDailyGoal() {
-            dailyGoal = parseInt(document.getElementById('daily-goal-input').value) || 5
-            localStorage.setItem('dailyGoal', dailyGoal)
-            updateDailyProgress()
+        function setDailyGoal() {
+            dailyGoal = parseInt(document.getElementById('daily-goal').value) || 5;
+            localStorage.setItem('dailyGoal', dailyGoal);
+            updateDailyUI();
         }
 
-        function updateDailyProgress() {
-            const today = new Date().toISOString().split('T')[0]
+        function updateDailyUI() {
+            const today = new Date().toISOString().split('T')[0];
             if (lastDate !== today) {
-                todaySolved = 0
-                localStorage.setItem('todaySolved', 0)
-                localStorage.setItem('lastDate', today)
+                todaySolved = 0;
+                localStorage.setItem('lastDate', today);
+                localStorage.setItem('todaySolved', 0);
             }
-            const percent = Math.min(Math.round((todaySolved / dailyGoal) * 100), 100)
-            
-            document.getElementById('today-count').textContent = `${todaySolved} / ${dailyGoal}`
-            document.getElementById('today-progress-bar').style.width = percent + '%'
-            
-            const streakHTML = todaySolved >= dailyGoal 
-                ? `<i class="fa-solid fa-fire"></i> Daily goal achieved! Keep the streak alive` 
-                : `Keep going! ${dailyGoal - todaySolved} more to reach today's goal`
-            document.getElementById('streak-info').innerHTML = streakHTML
+            const percent = Math.min((todaySolved / dailyGoal) * 100, 100);
+            document.getElementById('today-count').textContent = `${todaySolved} / ${dailyGoal}`;
+            document.getElementById('today-bar').style.width = percent + '%';
+            document.getElementById('streak-text').innerHTML = todaySolved >= dailyGoal 
+                ? '🎉 Daily goal achieved! Great job!' 
+                : `Keep going! ${dailyGoal - todaySolved} more problems today`;
         }
 
-        function incrementTodaySolved() {
-            const today = new Date().toISOString().split('T')[0]
+        function incrementDailyCount() {
+            const today = new Date().toISOString().split('T')[0];
             if (lastDate !== today) {
-                todaySolved = 0
-                localStorage.setItem('lastDate', today)
+                todaySolved = 0;
+                localStorage.setItem('lastDate', today);
             }
-            todaySolved++
-            localStorage.setItem('todaySolved', todaySolved)
-            updateDailyProgress()
+            todaySolved++;
+            localStorage.setItem('todaySolved', todaySolved);
+            updateDailyUI();
         }
 
-        // ==================== CSV & DATA ====================
-        function parseCSV(csvText) {
-            const lines = csvText.trim().split('\n')
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''))
-            const data = []
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue
-                const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(field => field.replace(/^"|"$/g, '').trim())
-                if (row.length === headers.length) {
-                    const obj = {}
-                    headers.forEach((h, idx) => obj[h] = row[idx])
-                    data.push(obj)
-                }
-            }
-            return data
-        }
-
+        // ==================== LOAD COMPANIES ====================
         async function loadCompanies() {
             try {
-                const res = await fetch('https://api.github.com/repos/liquidslr/interview-company-wise-problems/contents')
-                const items = await res.json()
-                allCompanies = items.filter(i => i.type === 'dir').map(i => i.name).sort()
+                const res = await fetch('https://api.github.com/repos/liquidslr/interview-company-wise-problems/contents');
+                const data = await res.json();
+                allCompanies = data.filter(item => item.type === 'dir').map(item => item.name).sort();
             } catch (e) {
-                allCompanies = ["Meta","Amazon","Google","Microsoft","Apple","Netflix","Uber","LinkedIn","Adobe","Oracle","AMD","Accenture"]
+                allCompanies = ["Meta","Amazon","Google","Microsoft","Apple","Netflix","Uber","LinkedIn","AMD","Accenture"];
             }
-            renderCompanyList(allCompanies)
+            renderCompanyList(allCompanies);
         }
 
-        function renderCompanyList(list) {
-            const container = document.getElementById('company-list')
-            container.innerHTML = ''
-            list.forEach(company => {
-                const div = document.createElement('div')
-                div.className = `sidebar-link px-4 py-3 mx-2 rounded-3xl cursor-pointer flex items-center gap-x-3 ${currentCompany === company ? 'bg-orange-500 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`
-                div.innerHTML = `<span class="text-2xl">${getCompanyEmoji(company)}</span><span class="font-medium">${company}</span>`
-                div.onclick = () => selectCompany(company)
-                container.appendChild(div)
-            })
-        }
-
-        function getCompanyEmoji(c) {
-            const map = {"Meta":"📘","Amazon":"📦","Google":"🔍","Microsoft":"🪟","Apple":"🍎"}
-            return map[c] || "🏢"
+        function renderCompanyList(companies) {
+            const container = document.getElementById('company-list');
+            container.innerHTML = '';
+            companies.forEach(company => {
+                const div = document.createElement('div');
+                div.className = `sidebar-link px-5 py-4 mx-2 rounded-3xl cursor-pointer flex items-center gap-3 ${currentCompany === company ? 'bg-orange-500 text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`;
+                div.innerHTML = `<span class="text-2xl">${getCompanyEmoji(company)}</span><span class="font-medium">${company}</span>`;
+                div.onclick = () => selectCompany(company);
+                container.appendChild(div);
+            });
         }
 
         function filterCompanies() {
-            const term = document.getElementById('company-search').value.toLowerCase()
-            const filtered = allCompanies.filter(c => c.toLowerCase().includes(term))
-            renderCompanyList(filtered)
+            const term = document.getElementById('company-search').value.toLowerCase().trim();
+            const filtered = allCompanies.filter(c => c.toLowerCase().includes(term));
+            renderCompanyList(filtered);
         }
 
-        // ==================== COMPANY SELECTION ====================
+        // ==================== SELECT COMPANY ====================
         async function selectCompany(company) {
-            currentCompany = company
-            currentPeriod = TIME_PERIODS[0]
+            currentCompany = company;
+            currentPeriod = TIME_PERIODS[0];
 
-            document.getElementById('welcome-screen').classList.add('hidden')
-            document.getElementById('company-view').classList.remove('hidden')
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('company-view').classList.remove('hidden');
 
-            document.getElementById('company-name').textContent = company
-            document.getElementById('company-icon').innerHTML = getCompanyEmoji(company)
+            document.getElementById('company-name').textContent = company;
+            document.getElementById('company-icon').innerHTML = getCompanyEmoji(company);
+            document.getElementById('tip-company').textContent = company;
 
-            renderTimeTabs()
-            await loadPeriodData(currentPeriod)
-            updateDailyProgress()
+            renderTimeTabs();
+            await loadPeriodData(currentPeriod);
+            updateDailyUI();
         }
 
         function renderTimeTabs() {
-            const container = document.getElementById('time-tabs')
-            container.innerHTML = ''
-            TIME_PERIODS.forEach(p => {
-                const btn = document.createElement('button')
-                btn.className = `px-6 py-2 text-sm font-medium rounded-3xl ${currentPeriod.file === p.file ? 'bg-orange-500 text-white' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`
-                btn.textContent = p.label
-                btn.onclick = () => { currentPeriod = p; renderTimeTabs(); loadPeriodData(p) }
-                container.appendChild(btn)
-            })
+            const container = document.getElementById('time-tabs');
+            container.innerHTML = '';
+            TIME_PERIODS.forEach(period => {
+                const btn = document.createElement('button');
+                btn.className = `px-6 py-2.5 text-sm font-medium rounded-3xl transition-all ${currentPeriod.file === period.file ? 'bg-orange-500 text-white' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`;
+                btn.textContent = period.label;
+                btn.onclick = () => {
+                    currentPeriod = period;
+                    renderTimeTabs();
+                    loadPeriodData(period);
+                };
+                container.appendChild(btn);
+            });
         }
 
         async function loadPeriodData(period) {
-            const url = `https://raw.githubusercontent.com/liquidslr/interview-company-wise-problems/main/${encodeURIComponent(currentCompany)}/${encodeURIComponent(period.file)}`
+            const url = `https://raw.githubusercontent.com/liquidslr/interview-company-wise-problems/main/${encodeURIComponent(currentCompany)}/${encodeURIComponent(period.file)}`;
             try {
-                const res = await fetch(url)
-                const csvText = await res.text()
-                currentProblems = parseCSV(csvText)
-                document.getElementById('total-problems').innerHTML = `${currentProblems.length} problems • ${period.label}`
-                renderDifficultyStats()
-                renderTable(currentProblems)
+                const res = await fetch(url);
+                if (!res.ok) throw new Error();
+                const text = await res.text();
+                currentProblems = parseCSV(text);
+                document.getElementById('total-problems').innerHTML = `${currentProblems.length} problems • ${period.label}`;
+                renderStats();
+                renderTable(currentProblems);
             } catch (e) {
-                document.getElementById('table-body').innerHTML = `<tr><td colspan="6" class="py-16 text-center text-gray-400">No data available for this period</td></tr>`
+                document.getElementById('table-body').innerHTML = `<tr><td colspan="6" class="text-center py-20 text-gray-400">No data available for this period</td></tr>`;
             }
         }
 
         // ==================== STATS & TABLE ====================
-        function renderDifficultyStats() {
-            const easy = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'EASY').length
-            const medium = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'MEDIUM').length
-            const hard = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'HARD').length
-            const total = currentProblems.length || 1
+        function renderStats() {
+            const easy = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'EASY').length;
+            const medium = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'MEDIUM').length;
+            const hard = currentProblems.filter(p => (p.Difficulty || '').toUpperCase() === 'HARD').length;
+            const total = currentProblems.length || 1;
 
             document.getElementById('stats-bars').innerHTML = `
-                <div class="flex items-center gap-3"><span class="w-12 text-emerald-500">Easy</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-easy h-3" style="width:${(easy/total)*100}%"></div></div><span class="font-mono">${easy}</span></div>
-                <div class="flex items-center gap-3"><span class="w-12 text-amber-500">Medium</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-medium h-3" style="width:${(medium/total)*100}%"></div></div><span class="font-mono">${medium}</span></div>
-                <div class="flex items-center gap-3"><span class="w-12 text-red-500">Hard</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-hard h-3" style="width:${(hard/total)*100}%"></div></div><span class="font-mono">${hard}</span></div>
-            `
+                <div class="flex items-center gap-4"><span class="w-14 text-emerald-600">Easy</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-easy h-3" style="width: ${(easy/total)*100}%"></div></div><span class="font-mono">${easy}</span></div>
+                <div class="flex items-center gap-4"><span class="w-14 text-amber-600">Medium</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-medium h-3" style="width: ${(medium/total)*100}%"></div></div><span class="font-mono">${medium}</span></div>
+                <div class="flex items-center gap-4"><span class="w-14 text-red-600">Hard</span><div class="flex-1 h-3 bg-gray-200 dark:bg-gray-700 rounded-full"><div class="difficulty-hard h-3" style="width: ${(hard/total)*100}%"></div></div><span class="font-mono">${hard}</span></div>
+            `;
 
-            const ctx = document.getElementById('difficulty-chart')
-            if (difficultyChart) difficultyChart.destroy()
-            difficultyChart = new Chart(ctx, {
+            if (difficultyChart) difficultyChart.destroy();
+            difficultyChart = new Chart(document.getElementById('difficulty-chart'), {
                 type: 'doughnut',
-                data: { labels: ['Easy','Medium','Hard'], datasets: [{ data: [easy,medium,hard], backgroundColor: ['#10b981','#eab308','#ef4444'] }] },
-                options: { cutout: 65, plugins: { legend: { display: false }}}
-            })
+                data: { labels: ['Easy','Medium','Hard'], datasets: [{ data: [easy, medium, hard], backgroundColor: ['#10b981', '#eab308', '#ef4444'] }] },
+                options: { cutout: 65, plugins: { legend: { display: false } } }
+            });
 
-            updateSolvedCount()
+            updateSolvedCount();
         }
 
         function updateSolvedCount() {
-            const key = `${currentCompany}_solved`
-            const solvedSet = new Set(solvedProblems[key] || [])
-            const solved = currentProblems.filter(p => solvedSet.has(p.Title || p['Problem Title'])).length
-            const total = currentProblems.length || 1
-            document.getElementById('solved-count').textContent = solved
-            document.getElementById('solved-total').innerHTML = `/ ${total}`
-            document.getElementById('progress-circle').textContent = `${Math.round(solved/total*100)}%`
+            const key = `${currentCompany}_solved`;
+            const solvedSet = new Set(solvedProblems[key] || []);
+            const solved = currentProblems.filter(p => solvedSet.has(p.Title || p['Problem Title'])).length;
+            const total = currentProblems.length || 1;
+            document.getElementById('solved-count').textContent = solved;
+            document.getElementById('solved-total').textContent = `/ ${total}`;
+            document.getElementById('progress-percent').textContent = `${Math.round((solved / total) * 100)}%`;
         }
 
         function toggleSolved(title, checked) {
-            const key = `${currentCompany}_solved`
-            if (!solvedProblems[key]) solvedProblems[key] = []
-            const set = new Set(solvedProblems[key])
+            const key = `${currentCompany}_solved`;
+            if (!solvedProblems[key]) solvedProblems[key] = [];
+            const set = new Set(solvedProblems[key]);
             if (checked) {
-                set.add(title)
-                incrementTodaySolved()
-            } else set.delete(title)
-            solvedProblems[key] = Array.from(set)
-            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems))
-            updateSolvedCount()
-            renderTable(currentProblems)
-        }
-
-        function markAllSolved() {
-            if (!confirm('Mark all problems as solved?')) return
-            const key = `${currentCompany}_solved`
-            solvedProblems[key] = currentProblems.map(p => p.Title || p['Problem Title'])
-            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems))
-            currentProblems.forEach(() => incrementTodaySolved())
-            updateSolvedCount()
-            renderTable(currentProblems)
-        }
-
-        function clearSolved() {
-            if (!confirm('Reset all solved marks?')) return
-            const key = `${currentCompany}_solved`
-            delete solvedProblems[key]
-            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems))
-            updateSolvedCount()
-            renderTable(currentProblems)
+                set.add(title);
+                incrementDailyCount();
+            } else set.delete(title);
+            solvedProblems[key] = Array.from(set);
+            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems));
+            updateSolvedCount();
+            renderTable(currentProblems);
         }
 
         function renderTable(problems) {
-            const tbody = document.getElementById('table-body')
-            tbody.innerHTML = ''
-            const key = `${currentCompany}_solved`
-            const solvedSet = new Set(solvedProblems[key] || [])
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            const key = `${currentCompany}_solved`;
+            const solvedSet = new Set(solvedProblems[key] || []);
 
-            let filtered = problems
-            if (currentDifficultyFilter !== 'all') filtered = filtered.filter(p => (p.Difficulty || '').toUpperCase() === currentDifficultyFilter)
-            if (showUnsolvedOnly) filtered = filtered.filter(p => !solvedSet.has(p.Title || p['Problem Title']))
+            let filtered = problems;
+            if (currentFilter !== 'all') filtered = filtered.filter(p => (p.Difficulty || '').toUpperCase() === currentFilter);
+            if (showUnsolvedOnly) filtered = filtered.filter(p => !solvedSet.has(p.Title || p['Problem Title']));
 
-            filtered.forEach(problem => {
-                const title = problem.Title || problem['Problem Title'] || 'Untitled'
-                const isSolved = solvedSet.has(title)
-                const row = document.createElement('tr')
-                row.className = 'table-row'
+            filtered.forEach(p => {
+                const title = p.Title || p['Problem Title'] || 'Untitled';
+                const isSolved = solvedSet.has(title);
+                const row = document.createElement('tr');
+                row.className = 'table-row';
                 row.innerHTML = `
-                    <td class="px-4 py-4"><span class="px-4 py-1 text-xs font-bold rounded-3xl text-white ${problem.Difficulty === 'EASY' ? 'difficulty-easy' : problem.Difficulty === 'MEDIUM' ? 'difficulty-medium' : 'difficulty-hard'}">${problem.Difficulty || '—'}</span></td>
-                    <td class="px-4 py-4 font-medium"><a href="${problem.Link}" target="_blank" class="hover:text-orange-500">${title} ↗</a></td>
-                    <td class="px-4 py-4 text-right font-mono">${parseFloat(problem.Frequency || 0).toFixed(1)}</td>
-                    <td class="px-4 py-4 text-right font-mono">${(parseFloat(problem['Acceptance Rate'] || 0)*100).toFixed(1)}%</td>
-                    <td class="px-4 py-4 text-xs">${(problem.Topics || '').split(',').map(t => `<span class="bg-gray-200 dark:bg-gray-700 px-2 py-px rounded">${t.trim()}</span>`).join(' ')}</td>
-                    <td class="px-4 py-4 text-center"><input type="checkbox" ${isSolved?'checked':''} onchange="toggleSolved('${title}', this.checked)" class="w-5 h-5 accent-emerald-500"></td>
-                `
-                tbody.appendChild(row)
-            })
+                    <td class="px-4 py-4"><span class="px-4 py-1 text-xs font-bold rounded-3xl text-white ${p.Difficulty === 'EASY' ? 'difficulty-easy' : p.Difficulty === 'MEDIUM' ? 'difficulty-medium' : 'difficulty-hard'}">${p.Difficulty || '—'}</span></td>
+                    <td class="px-4 py-4 font-medium"><a href="${p.Link || '#'}" target="_blank" class="hover:text-orange-500">${title} ↗</a></td>
+                    <td class="px-4 py-4 text-right font-mono">${parseFloat(p.Frequency || 0).toFixed(1)}</td>
+                    <td class="px-4 py-4 text-right font-mono">${(parseFloat(p['Acceptance Rate'] || 0) * 100).toFixed(1)}%</td>
+                    <td class="px-4 py-4 text-xs">${(p.Topics || '').split(',').map(t => `<span class="bg-gray-200 dark:bg-gray-700 px-2 py-px rounded mr-1">${t.trim()}</span>`).join('')}</td>
+                    <td class="px-4 py-4 text-center"><input type="checkbox" ${isSolved ? 'checked' : ''} onchange="toggleSolved('${title}', this.checked)" class="w-5 h-5 accent-emerald-500 cursor-pointer"></td>
+                `;
+                tbody.appendChild(row);
+            });
         }
 
-        function sortTable(col) { /* simple sort logic - you can enhance if needed */ }
-
         function filterDifficulty(diff) {
-            currentDifficultyFilter = diff
-            document.querySelectorAll('button[id^="filter-"]').forEach(b => b.classList.toggle('bg-orange-500', b.id === 'filter-all' && diff === 'all'))
-            renderTable(currentProblems)
+            currentFilter = diff;
+            document.getElementById('filter-all').classList.toggle('bg-orange-500', diff === 'all');
+            renderTable(currentProblems);
         }
 
         function toggleUnsolvedFilter() {
-            showUnsolvedOnly = !showUnsolvedOnly
-            const btn = document.getElementById('unsolved-btn')
-            btn.textContent = showUnsolvedOnly ? "Show All Problems" : "Show Unsolved Only"
-            renderTable(currentProblems)
+            showUnsolvedOnly = !showUnsolvedOnly;
+            document.getElementById('unsolved-btn').textContent = showUnsolvedOnly ? "Show All" : "Unsolved Only";
+            renderTable(currentProblems);
         }
 
-        // ==================== TIPS SECTION ====================
+        function markAllSolved() {
+            if (!confirm("Mark all as solved?")) return;
+            const key = `${currentCompany}_solved`;
+            solvedProblems[key] = currentProblems.map(p => p.Title || p['Problem Title']);
+            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems));
+            currentProblems.forEach(() => incrementDailyCount());
+            updateSolvedCount();
+            renderTable(currentProblems);
+        }
+
+        function clearSolved() {
+            if (!confirm("Clear all solved marks?")) return;
+            const key = `${currentCompany}_solved`;
+            delete solvedProblems[key];
+            localStorage.setItem('solvedProblems', JSON.stringify(solvedProblems));
+            updateSolvedCount();
+            renderTable(currentProblems);
+        }
+
+        // ==================== TIPS ====================
         function toggleTips() {
-            tipsOpen = !tipsOpen
-            document.getElementById('tips-content').classList.toggle('hidden', !tipsOpen)
-            document.getElementById('tips-arrow').style.transform = tipsOpen ? 'rotate(180deg)' : 'rotate(0deg)'
-        }
-
-        function updateCompanyTips() {
-            const tipsEl = document.getElementById('company-tips')
-            const tipText = COMPANY_TIPS[currentCompany] || COMPANY_TIPS['Default']
-            tipsEl.innerHTML = `<li>${tipText}</li>`
+            tipsOpen = !tipsOpen;
+            document.getElementById('tips-content').classList.toggle('hidden', !tipsOpen);
+            document.getElementById('tips-arrow').style.transform = tipsOpen ? 'rotate(180deg)' : '';
         }
 
         // ==================== UTILITIES ====================
-        function exportCurrentCSV() { /* same as before */ }
-        function pickRandomProblem() { /* same as before */ }
-        function toggleMobileSidebar() { document.getElementById('sidebar').classList.toggle('hidden') }
+        function pickRandomProblem() {
+            if (!currentProblems.length) return alert("No problems loaded");
+            const random = currentProblems[Math.floor(Math.random() * currentProblems.length)];
+            if (random.Link) window.open(random.Link, '_blank');
+        }
 
-        // ==================== INITIALIZE ====================
-        window.onload = function() {
-            initTailwind()
-            loadCompanies()
-            updateDailyProgress()
+        function exportCurrentCSV() {
+            if (!currentProblems.length) return;
+            let csv = "Difficulty,Title,Frequency,Acceptance Rate,Link,Topics\n";
+            currentProblems.forEach(p => {
+                csv += `"${p.Difficulty || ''}","${p.Title || p['Problem Title'] || ''}",${p.Frequency || 0},${p['Acceptance Rate'] || 0},"${p.Link || ''}","${p.Topics || ''}"\n`;
+            });
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentCompany}_problems.csv`;
+            a.click();
+        }
 
+        function toggleMobileSidebar() {
+            document.getElementById('sidebar').classList.toggle('hidden');
+        }
+
+        // ==================== INIT ====================
+        window.onload = async () => {
+            await loadCompanies();
+
+            // Load saved theme
             if (localStorage.getItem('theme') === 'light') {
-                isDark = false
-                document.documentElement.classList.remove('dark')
-                document.getElementById('theme-toggle').innerHTML = '🌙'
+                isDarkMode = false;
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-toggle').innerHTML = '🌙';
             }
 
-            // Global search
-            document.getElementById('global-search').addEventListener('input', function() {
-                if (!currentProblems.length) return
-                const term = this.value.toLowerCase()
-                const filtered = currentProblems.filter(p => (p.Title || '').toLowerCase().includes(term))
-                renderTable(filtered)
-            })
+            // Daily goal input
+            document.getElementById('daily-goal').value = dailyGoal;
 
-            console.log('%c✅ LeetCode CompanyWise Pro loaded with Daily Goal + Interview Tips!', 'color:#f59e0b; font-weight:bold')
-        }
+            // Global search
+            document.getElementById('global-search').addEventListener('input', (e) => {
+                if (!currentProblems.length) return;
+                const term = e.target.value.toLowerCase();
+                const filtered = currentProblems.filter(p => 
+                    (p.Title || p['Problem Title'] || '').toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+            console.log('%c✅ LeetCode CompanyWise Pro is fully loaded with Daily Goal + Interview Tips!', 'color:#f59e0b; font-size:14px;');
+        };
     </script>
 </body>
 </html>
