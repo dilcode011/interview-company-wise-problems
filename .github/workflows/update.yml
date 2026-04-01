@@ -23,10 +23,18 @@ jobs:
         with:
           python-version: '3.11'
 
-  
+      # Debug: See exact folder structure (helpful for first run)
+      - name: Debug Folder Structure
+        run: |
+          pwd
+          ls -la
+          echo "=== Inside the repo folder ==="
+          ls -la interview-company-wise-problems || echo "Folder not found"
+
+      # ✅ Correct path (double folder)
       - name: Update Company Data - Amazon
         run: |
-          cd interview-company-wise-problems
+          cd interview-company-wise-problems/interview-company-wise-problems
           python scripts/update_company.py "Amazon"
 
       - name: Commit & Push changes
