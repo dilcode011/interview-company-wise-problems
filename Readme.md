@@ -19,10 +19,9 @@ Try the **new searchable dashboard** with difficulty statistics, real-time searc
 - Clean & modern UI
 
 ## How to Use
-
 1. Open the **[Interactive Dashboard](https://dilcode011.github.io/interview-company-wise-problems)**
 2. Search for your target company (Amazon, Google, Meta, etc.)
-3. Click **"View All CSVs →"** to see the following files:
+3. Click **"View All CSVs →"** to see:
    - `1. Thirty Days.csv`
    - `2. Three Months.csv`
    - `3. Six Months.csv`
@@ -30,14 +29,12 @@ Try the **new searchable dashboard** with difficulty statistics, real-time searc
    - `5. All.csv`
 
 ## Project Structure
-
 - Company folders at root (`Amazon/`, `Google/`, `Meta/`, etc.)
 - Each folder contains 5 CSV files with columns: **Difficulty, Title, Frequency, Acceptance Rate, Link, Topics**
 
 ## How to Contribute
-
 See **[CONTRIBUTING.md](CONTRIBUTING.md)** — We welcome updates to CSVs, new features, and improvements!
 
 ---
 
- Star this repo if it helped you prepare for interviews!
+Star this repo if it helped you prepare for interviews!
